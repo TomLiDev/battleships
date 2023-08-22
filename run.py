@@ -5,21 +5,51 @@ def game_select ():
     """
     print("Welcome to Battleships!")
     print("Please select a board size")
-    print("small = 6x6 game board")
-    print("large = 10x10 game board")
+    print("6 = 6x6 game board")
+    print("10 = 10x10 game board")
     
-    userinput = input("Enter small or large")
+    userinput = input("Enter 6 or 10: ")
+
+    print(userinput)
+
+    if userinput == "10":
+        userboard = 1
+    else:
+        userboard = 2
+
+    print(userboard)
+    print(type(userboard))
+
+    return userboard
 
 game_select()
 
-def create_board():
+def create_board(userboard = 10):
+    """
+    Function which creates the game board based on user selection. 
+    Game board is a list of lists populated with zero's initially 
+    to represent empty open sea. Game board either 6x6 or 10x10 
+    based on user selection.
+    """
     board = []
     row = []
-    while len(board) < 10:
-        while len(row) < 10:
-            row.append(0)
-        print(row)
-        board.append(row)
-    print("Board", board)
+    if userboard == 10:
+
+        while len(board) < 10:
+            while len(row) < 10:
+                row.append(0)
+            print(row)
+            board.append(row)
+        print("LargeBoard", board)
+    else:
+        while len(board) < 6:
+            while len(row) < 6:
+                row.append(0)
+            print(row)
+            board.append(row)
+        print("SmallBoard", board)
+    
+    return board
 
 create_board()
+
