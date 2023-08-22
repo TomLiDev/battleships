@@ -1,10 +1,28 @@
 import random
 
 SHIPS = [
-    {"Name": "Battleship", "Map_value: 4", "Size: 4"}
-    {"Name": "Cruiser", "Map_value: 3", "Size: 3"}
-    {"Name": "Destroyer", "Map_value: 2", "Size: 2"}
+    {"Name": "Battleship", "Map_value": 4, "Size": 4},
+    {"Name": "Cruiser", "Map_value": 3, "Size": 3},
+    {"Name": "Destroyer", "Map_value": 2, "Size": 2}
 ]
+
+def place_ship(board):
+    """
+    Function to loop through the ships list of dicts and place them
+    on the board for both human player and computer
+    """
+    print("Ships board", board)
+    print(SHIPS)
+    print(SHIPS[1])
+    ship_row = random.randrange(0, 10)
+    print("ship row", ship_row)
+    ship_start = random.randrange(0, 10)
+    print("ship start", ship_start)
+    print("ship value", SHIPS["Map_value"])
+
+    for ship in SHIPS:
+        board[ship_row] = ["Map_value"]
+        print(board[ship_row])
 
 def create_board(userboard):
     """
@@ -31,6 +49,7 @@ def create_board(userboard):
             board.append(row)
         print("SmallBoard", board)
     
+    place_ship(board)
     return board
 
 
@@ -50,22 +69,14 @@ def game_select ():
 
     if userinput == "10":
         boardsize = 10
-    else:
+        create_board(boardsize)
+    if userinput == "6":
         boardsize = 6
-
-    print(boardsize)
-    print(type(boardsize))
-
-    create_board(boardsize)
+        create_board(boardsize)
+    else:
+        print("Please enter either 10 or 6")
+        game_select()
 
     return boardsize
 
 game_select()
-
-def create_battleship():
-    ship_row = random.randrange(0, 10)
-    print("ship row", ship_row)
-    ship_start = random.randrange(0, 10)
-    print("ship row", ship_row)
-
-create_battleship()
