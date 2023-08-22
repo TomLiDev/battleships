@@ -1,3 +1,11 @@
+import random
+
+SHIPS = [
+    {"Name": "Battleship", "Map_value: 4", "Size: 4"}
+    {"Name": "Cruiser", "Map_value: 3", "Size: 3"}
+    {"Name": "Destroyer", "Map_value: 2", "Size: 2"}
+]
+
 def create_board(userboard):
     """
     Function which creates the game board based on user selection. 
@@ -41,17 +49,23 @@ def game_select ():
     print(userinput)
 
     if userinput == "10":
-        userboard = 10
+        boardsize = 10
     else:
-        userboard = 6
+        boardsize = 6
 
-    print(userboard)
-    print(type(userboard))
+    print(boardsize)
+    print(type(boardsize))
 
-    create_board(userboard)
+    create_board(boardsize)
 
-    return userboard
+    return boardsize
 
 game_select()
 
+def create_battleship():
+    ship_row = random.randrange(0, 10)
+    print("ship row", ship_row)
+    ship_start = random.randrange(0, 10)
+    print("ship row", ship_row)
 
+create_battleship()
