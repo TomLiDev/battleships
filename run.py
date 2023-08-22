@@ -1,30 +1,4 @@
-def game_select ():
-    """
-    Function which displays welcome message and gets
-    initial choice from user on board size
-    """
-    print("Welcome to Battleships!")
-    print("Please select a board size")
-    print("6 = 6x6 game board")
-    print("10 = 10x10 game board")
-    
-    userinput = input("Enter 6 or 10: ")
-
-    print(userinput)
-
-    if userinput == "10":
-        userboard = 1
-    else:
-        userboard = 2
-
-    print(userboard)
-    print(type(userboard))
-
-    return userboard
-
-game_select()
-
-def create_board(userboard = 10):
+def create_board(userboard):
     """
     Function which creates the game board based on user selection. 
     Game board is a list of lists populated with zero's initially 
@@ -51,5 +25,33 @@ def create_board(userboard = 10):
     
     return board
 
-create_board()
+
+def game_select ():
+    """
+    Function which displays welcome message and gets
+    initial choice from user on board size
+    """
+    print("Welcome to Battleships!")
+    print("Please select a board size")
+    print("6 = 6x6 game board")
+    print("10 = 10x10 game board")
+    
+    userinput = input("Enter 6 or 10: ")
+
+    print(userinput)
+
+    if userinput == "10":
+        userboard = 10
+    else:
+        userboard = 6
+
+    print(userboard)
+    print(type(userboard))
+
+    create_board(userboard)
+
+    return userboard
+
+game_select()
+
 
