@@ -13,11 +13,13 @@ def game_select ():
 game_select()
 
 def create_board():
-    board = [0]
-    row = [0]
+    board = []
+    row = []
     while len(board) < 10:
         while len(row) < 10:
             row.append(0)
         print(row)
+        board.append(row)
+    print("Board", board)
 
 create_board()
