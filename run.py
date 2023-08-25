@@ -20,11 +20,6 @@ def place_ship(board):
     print(board)
     print(len(board))
 
-    columns = [i for i in range(0, len(board)+1)]
-    print(columns)
-    board.insert(0, columns)
-    print(board)
-
 
 def create_board(boardsize):
     """
@@ -35,15 +30,17 @@ def create_board(boardsize):
     """
     print("Game board creation")
     board = []
-    row = []
     letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     if boardsize == 10:
-        while len(board) < 10:
-            while len(row) < 10:
-                row.append(0)
-            print(row)
-            board.append(row)
-        print("LargeBoard", board)
+        board = [[0] * 10 for i in range(10)]
+        print("list board", board)
+        for i in range(len(board)):
+            board[i].insert(0, letters[i])
+            print(board[i])
+        columns = [i for i in range(0, len(board)+1)]
+        print(columns)
+        board.insert(0, columns)
+        print("final 10", board)
 
     if boardsize == 6:
         board = [[0] * 6 for i in range(6)]
@@ -51,7 +48,11 @@ def create_board(boardsize):
         for i in range(len(board)):
             board[i].insert(0, letters[i])
             print(board[i])
-        print(board)
+        columns = [i for i in range(0, len(board)+1)]
+        print(columns)
+        board.insert(0, columns)
+        print("final 6", board)
+
     return board
 
 
