@@ -14,11 +14,17 @@ def place_ship(board):
     """
     print("board in place function", board)
     print("ship value", SHIPS[0]["value"])
-    
-    row = board[2]
-    print(board[2])
-    print(board)
     print(len(board))
+
+    ship_length = range(SHIPS[0]["value"])
+    print(ship_length)
+    print(len(ship_length))
+
+    board[2][2] = len(ship_length)
+    print(board)
+    for i in ship_length:
+        board[2][2 + i] = len(ship_length)
+    print(board)
 
 
 def create_board(boardsize):
@@ -53,6 +59,7 @@ def create_board(boardsize):
         board.insert(0, columns)
         print("final 6", board)
 
+    place_ship(board)
     return board
 
 
