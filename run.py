@@ -1,18 +1,40 @@
 import random
+import copy
 
+letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 SHIPS = [
     {"name": "Battleship", "value": 4},
     {"name": "Cruiser", "value": 3}
 ]
 
 
-def computer_fire(player_board)
+def computer_fire(player_board):
     """
-    
+    Function for controlling computer return fire on players board
+    Creates random grid references for fire selection
     """
+    print("Enemy fire incoming!")
+    print(len(player_board))
+    if len(player_board) == 7:
+        computer_row_fire = random.randrange(1, 7)
+        print(computer_row_fire)
+        computer_column_fire = random.randrange(1, 7)
+        print(computer_column_fire)
+
+        if player_board[computer_row_fire][computer_column_fire] != 0:
+            print("Oh shit! We got hit!")
+            player_board[computer_row_fire][computer_column_fire] = "H"
+            print(player_board)
+        else:
+            print("The enemy missed because they are shit")
+            player_board[computer_row_fire][computer_column_fire] = "X"
+            print(player_board)
+
+    elif len(player_board) == 11:
+        print(random.randrange(1, 11))
 
 
-def player_fire(computer_board):
+def player_fire(player_board, computer_board):
     """
     Function which takes input from player to
     fire on a certain grid reference on the computer board
@@ -27,31 +49,13 @@ def player_fire(computer_board):
         if row[0] == split_fire_reference[0]:
             print("This row", row[0], split_fire_reference[0])
             if row[column_ref] != 0:
-                print("Hit!")
+                print("Hit! Good shot captain")
                 row[column_ref] = "H"
             else:
-                print("You missed gay boy")
+                print("You missed")
                 row[column_ref] = "X"
-    
     print(computer_board)
-
-
-def place_ship_computer(blank_board):
-    """
-    Function which places ships on the computer gameboard, uses ship
-    value in dict to determine length
-    """
-    ship_length = range(SHIPS[0]["value"])
-    print(ship_length)
-    print(len(ship_length))
-    computer_board = blank_board
-
-    computer_board[4][2] = len(ship_length)
-    for i in ship_length:
-        computer_board[4][2 + i] = len(ship_length)
-    print("computer board", computer_board)
-    player_fire(computer_board)
-
+    computer_fire(player_board)
     return computer_board
 
 
@@ -60,16 +64,35 @@ def place_ship(blank_board):
     Function which places ships on the human user gameboard,
     uses ship value in dict to determine length
     """
-    ship_length = range(SHIPS[0]["value"])
-    print(ship_length)
-    print(len(ship_length))
-    player_board = blank_board
+    print("Ship placement")
+    computer_temp_board = copy.deepcopy(blank_board)
+    player_board = []
+    computer_board = []
 
-    for i in ship_length:
-        player_board[2][2 + i] = len(ship_length)
-    print("player board", player_board)
+    y = 1
+    while y < 3:
+        y += 1
+        if y == 2:
+            ship_length = range(SHIPS[0]["value"])
+            print(ship_length)
+            print(len(ship_length))
 
-    return player_board
+            for i in ship_length:
+                player_board = blank_board
+                player_board[2][2 + i] = len(ship_length)
+            print("player board", player_board)
+        elif y == 3:
+            ship_length = range(SHIPS[0]["value"])
+            print(ship_length)
+            print(len(ship_length))
+
+            for i in ship_length:
+                computer_board = computer_temp_board
+                computer_board[4][2 + i] = len(ship_length)
+            print("computer board", computer_board)
+            player_fire(player_board, computer_board)
+
+    return player_board, computer_board
 
 
 def create_board(boardsize):
@@ -81,58 +104,27 @@ def create_board(boardsize):
     """
     print("Game board creation")
     blank_board = []
-    letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
     if boardsize == 10:
-        y = 1
-        while y < 3:
-            y += 1
-            if y == 2:
-                blank_board = [[0] * 10 for i in range(10)]
-                print("list board", blank_board)
-                for i in range(len(blank_board)):
-                    blank_board[i].insert(0, letters[i])
-                    print(blank_board[i])
-                columns = [i for i in range(0, len(blank_board)+1)]
-                print(columns)
-                blank_board.insert(0, columns)
-                place_ship(blank_board)
+        blank_board = [[0] * 10 for i in range(10)]
+        print("list board", blank_board)
+        for i in range(len(blank_board)):
+            blank_board[i].insert(0, letters[i])
+            print(blank_board[i])
+        columns = [i for i in range(0, len(blank_board)+1)]
+        print(columns)
+        blank_board.insert(0, columns)
+        place_ship(blank_board)
 
-            elif y == 3:
-                blank_board = [[0] * 10 for i in range(10)]
-                print("list board", blank_board)
-                for i in range(len(blank_board)):
-                    blank_board[i].insert(0, letters[i])
-                    print(blank_board[i])
-                columns = [i for i in range(0, len(blank_board)+1)]
-                print(columns)
-                blank_board.insert(0, columns)
-                place_ship_computer(blank_board)
-
-    if boardsize == 6:
-        y = 1
-        while y < 3:
-            y += 1
-            if y == 2:
-                blank_board = [[0] * 6 for i in range(6)]
-                print("list board", blank_board)
-                for i in range(len(blank_board)):
-                    blank_board[i].insert(0, letters[i])
-                    print(blank_board[i])
-                columns = [i for i in range(0, len(blank_board)+1)]
-                print(columns)
-                blank_board.insert(0, columns)
-                place_ship(blank_board)
-
-            elif y == 3:
-                blank_board = [[0] * 6 for i in range(6)]
-                print("list board", blank_board)
-                for i in range(len(blank_board)):
-                    blank_board[i].insert(0, letters[i])
-                    print(blank_board[i])
-                columns = [i for i in range(0, len(blank_board)+1)]
-                print(columns)
-                blank_board.insert(0, columns)
-                place_ship_computer(blank_board)
+    elif boardsize == 6:
+        blank_board = [[0] * 6 for i in range(6)]
+        print("list board", blank_board)
+        for i in range(len(blank_board)):
+            blank_board[i].insert(0, letters[i])
+            print(blank_board[i])
+        columns = [i for i in range(0, len(blank_board)+1)]
+        print(columns)
+        blank_board.insert(0, columns)
+        place_ship(blank_board)
 
 
 def game_select():
