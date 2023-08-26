@@ -22,16 +22,29 @@ def computer_fire(player_board):
         print(computer_column_fire)
 
         if player_board[computer_row_fire][computer_column_fire] != 0:
-            print("Oh shit! We got hit!")
+            print("Captain we've been hit!")
             player_board[computer_row_fire][computer_column_fire] = "H"
             print(player_board)
         else:
-            print("The enemy missed because they are shit")
+            print("The enemy missed")
             player_board[computer_row_fire][computer_column_fire] = "X"
             print(player_board)
 
     elif len(player_board) == 11:
         print(random.randrange(1, 11))
+        computer_row_fire = random.randrange(1, 11)
+        print(computer_row_fire)
+        computer_column_fire = random.randrange(1, 11)
+        print(computer_column_fire)
+
+        if player_board[computer_row_fire][computer_column_fire] != 0:
+            print("Captain we've been hit!")
+            player_board[computer_row_fire][computer_column_fire] = "H"
+            print(player_board)
+        else:
+            print("The enemy missed")
+            player_board[computer_row_fire][computer_column_fire] = "X"
+            print(player_board)
 
 
 def player_fire(player_board, computer_board):
