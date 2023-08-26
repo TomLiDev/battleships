@@ -6,9 +6,39 @@ SHIPS = [
 ]
 
 
+def computer_fire(player_board)
+    """
+    
+    """
+
+
+def player_fire(computer_board):
+    """
+    Function which takes input from player to
+    fire on a certain grid reference on the computer board
+    """
+    print("Where shall we fire captain?")
+    user_grid_fire = input("Enter row,column reference e.g B,3: ")
+    print("Fire reference", user_grid_fire)
+    split_fire_reference = user_grid_fire.split(",")
+    column_ref = int(split_fire_reference[1])
+
+    for row in computer_board:
+        if row[0] == split_fire_reference[0]:
+            print("This row", row[0], split_fire_reference[0])
+            if row[column_ref] != 0:
+                print("Hit!")
+                row[column_ref] = "H"
+            else:
+                print("You missed gay boy")
+                row[column_ref] = "X"
+    
+    print(computer_board)
+
+
 def place_ship_computer(blank_board):
     """
-    Function which places ships on the computer gameboard, uses ship 
+    Function which places ships on the computer gameboard, uses ship
     value in dict to determine length
     """
     ship_length = range(SHIPS[0]["value"])
@@ -20,13 +50,14 @@ def place_ship_computer(blank_board):
     for i in ship_length:
         computer_board[4][2 + i] = len(ship_length)
     print("computer board", computer_board)
+    player_fire(computer_board)
 
     return computer_board
 
 
 def place_ship(blank_board):
     """
-    Function which places ships on the human user gameboard, 
+    Function which places ships on the human user gameboard,
     uses ship value in dict to determine length
     """
     ship_length = range(SHIPS[0]["value"])
@@ -43,9 +74,9 @@ def place_ship(blank_board):
 
 def create_board(boardsize):
     """
-    Function which creates the game board based on user selection. Game board 
+    Function which creates the game board based on user selection. Game board
     is a list of lists populated with zero's initially to represent empty
-    open sea. Game board either 6x6 or 10x10 
+    open sea. Game board either 6x6 or 10x10
     based on user selection.
     """
     print("Game board creation")
@@ -64,7 +95,6 @@ def create_board(boardsize):
                 columns = [i for i in range(0, len(blank_board)+1)]
                 print(columns)
                 blank_board.insert(0, columns)
-                print("final 10", blank_board)
                 place_ship(blank_board)
 
             elif y == 3:
@@ -76,7 +106,6 @@ def create_board(boardsize):
                 columns = [i for i in range(0, len(blank_board)+1)]
                 print(columns)
                 blank_board.insert(0, columns)
-                print("final 10", blank_board)
                 place_ship_computer(blank_board)
 
     if boardsize == 6:
@@ -92,7 +121,6 @@ def create_board(boardsize):
                 columns = [i for i in range(0, len(blank_board)+1)]
                 print(columns)
                 blank_board.insert(0, columns)
-                print("final 6", blank_board)
                 place_ship(blank_board)
 
             elif y == 3:
@@ -104,7 +132,6 @@ def create_board(boardsize):
                 columns = [i for i in range(0, len(blank_board)+1)]
                 print(columns)
                 blank_board.insert(0, columns)
-                print("final 6", blank_board)
                 place_ship_computer(blank_board)
 
 
@@ -116,7 +143,6 @@ def game_select():
     print("Please select a game board size")
     print("6 = 6x6 game board")
     print("10 = 10x10 game board")
-    
     userinput = input("Enter 6 or 10: ")
 
     print(userinput)
