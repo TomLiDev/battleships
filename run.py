@@ -8,7 +8,35 @@ SHIPS = [
 ]
 
 
-def computer_fire(player_board):
+def check_ships_remain(board):
+    """
+    Function for checking if there are any remaining ships, if there are none
+    then the game is ended and a winner declared.
+    """
+    print("Full board", board)
+    check_row = [x for x in board[1:]]
+    print("check row", check_row)
+    ships_surviving = 1
+    if ships_surviving < 3:
+        for row in check_row:
+            print("Test1", row)
+            second_check = [x for x in row[1:]]
+            print("Whoop", second_check)
+            for item in second_check:
+                if item == 4:
+                    print("This is a ship")
+                    ships_surviving += 1
+                    break
+            if ships_surviving == 2:
+                ships_surviving += 1
+                break
+    elif ships_surviving == 1:
+        print("ships sunk")
+
+    return ships_surviving
+
+
+def computer_fire(player_board, computer_board):
     """
     Function for controlling computer return fire on players board
     Creates random grid references for fire selection
@@ -45,6 +73,7 @@ def computer_fire(player_board):
             print("The enemy missed")
             player_board[computer_row_fire][computer_column_fire] = "X"
             print(player_board)
+    player_fire(player_board, computer_board)
 
 
 def player_fire(player_board, computer_board):
@@ -68,7 +97,8 @@ def player_fire(player_board, computer_board):
                 print("You missed")
                 row[column_ref] = "X"
     print(computer_board)
-    computer_fire(player_board)
+    check_ships_remain(computer_board)
+    computer_fire(player_board, computer_board)
     return computer_board
 
 
