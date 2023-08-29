@@ -1,5 +1,6 @@
 import random
 import copy
+import sys
 
 letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 SHIPS = [
@@ -8,7 +9,7 @@ SHIPS = [
 ]
 
 
-def check_ships_remain(board):
+def check_ships_remain(board, board_name):
     """
     Function for checking if there are any remaining ships, if there are none
     then the game is ended and a winner declared.
@@ -17,23 +18,36 @@ def check_ships_remain(board):
     check_row = [x for x in board[1:]]
     print("check row", check_row)
     ships_surviving = 1
-    if ships_surviving < 3:
+    if ships_surviving == 1:
+        y = 0
         for row in check_row:
             print("Test1", row)
             second_check = [x for x in row[1:]]
             print("Whoop", second_check)
             for item in second_check:
+                y += 1
+                print("Item", y)
                 if item == 4:
                     print("This is a ship")
                     ships_surviving += 1
                     break
+                elif y > 35 and ships_surviving == 1:
+                    print("No ships remaining")
+                    break
             if ships_surviving == 2:
-                ships_surviving += 1
+                print("Second break")
                 break
-    elif ships_surviving == 1:
-        print("ships sunk")
+            elif y > 35 and ships_surviving == 1:
+                print("No ships second break")
+                if board_name == "computer":
+                    print("Congratulations Captain, you won!")
+                    replay = input("Would you like to play again? (y/n): ")
+                if replay == "n":
+                    sys.exit()
+                elif replay == "y":
+                    game_select()
 
-    return ships_surviving
+        return ships_surviving
 
 
 def computer_fire(player_board, computer_board):
@@ -69,6 +83,7 @@ def computer_fire(player_board, computer_board):
             print("Captain we've been hit!")
             player_board[computer_row_fire][computer_column_fire] = "H"
             print(player_board)
+            check_ships_remain(player_board)
         else:
             print("The enemy missed")
             player_board[computer_row_fire][computer_column_fire] = "X"
@@ -93,12 +108,12 @@ def player_fire(player_board, computer_board):
             if row[column_ref] != 0:
                 print("Hit! Good shot captain")
                 row[column_ref] = "H"
+                check_ships_remain(computer_board, "computer")
+                computer_fire(player_board, computer_board)
             else:
                 print("You missed")
                 row[column_ref] = "X"
-    print(computer_board)
-    check_ships_remain(computer_board)
-    computer_fire(player_board, computer_board)
+                computer_fire(player_board, computer_board)
     return computer_board
 
 
