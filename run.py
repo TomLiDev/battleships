@@ -135,30 +135,36 @@ def place_ship(blank_board):
     player_board = []
     computer_board = []
 
-    y = 1
-    while y < 3:
-        y += 1
-        if y == 2:
-            ship_length = range(SHIPS[0]["value"])
-            print(ship_length)
-            print(len(ship_length))
+    check_row = [x for x in blank_board[1:]]
+    numbers_to_select = []
+    i = 0
+    for item in check_row:
+        numbers_to_select.append(i)
+        i += 1
+    print("Numbers to select", numbers_to_select)
 
-            for i in ship_length:
-                player_board = blank_board
-                player_board[2][2 + i] = len(ship_length)
-            print("player board", player_board)
-        elif y == 3:
-            ship_length = range(SHIPS[0]["value"])
-            print(ship_length)
-            print(len(ship_length))
+    for ship in SHIPS:
+        player_board = blank_board
+        print(ship)
+        print(ship["value"])
+        temp_ship_length = range(ship["value"])
+        print(temp_ship_length)
+        ship_length = len(temp_ship_length)
+        print("Actual ship length", ship_length)
 
-            for i in ship_length:
-                computer_board = computer_temp_board
-                computer_board[4][2 + i] = len(ship_length)
-            print("computer board", computer_board)
-            player_fire(player_board, computer_board)
-
-    return player_board, computer_board
+        print(numbers_to_select)
+        row_number = random.randrange(1, len(numbers_to_select))
+        print("row number", row_number)
+        chosen_row = numbers_to_select[row_number]
+        print("chosen row", chosen_row)
+        end_value = len(check_row) - ship_length
+        print("end value", end_value)
+        grid = random.randrange(1, end_value)
+        for i in range(ship_length):
+            player_board[chosen_row][grid + i] = ship_length
+        numbers_to_select.pop(row_number)
+        print("ongoing numbers", numbers_to_select)
+        print("player board", player_board)
 
 
 def create_board(boardsize):
