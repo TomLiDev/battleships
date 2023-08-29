@@ -5,7 +5,9 @@ import sys
 letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 SHIPS = [
     {"name": "Battleship", "value": 4},
-    {"name": "Cruiser", "value": 3}
+    {"name": "Cruiser", "value": 3},
+    {"name": "Destroyer", "value": 2},
+    {"name": "Submarine", "value": 1}
 ]
 
 
@@ -26,7 +28,6 @@ def check_ships_remain(board, board_name):
             print("Whoop", second_check)
             for item in second_check:
                 y += 1
-                print("Item", y)
                 if item == 4:
                     print("This is a ship")
                     ships_surviving += 1
@@ -42,10 +43,17 @@ def check_ships_remain(board, board_name):
                 if board_name == "computer":
                     print("Congratulations Captain, you won!")
                     replay = input("Would you like to play again? (y/n): ")
-                if replay == "n":
-                    sys.exit()
-                elif replay == "y":
-                    game_select()
+                    if replay == "n":
+                        sys.exit()
+                    elif replay == "y":
+                        game_select()
+                elif board_name == "player":
+                    print("Captain we've been sunk, you lost")
+                    replay = input("Would you like to play again? (y/n): ")
+                    if replay == "n":
+                        sys.exit()
+                    elif replay == "y":
+                        game_select()
 
         return ships_surviving
 
@@ -83,7 +91,7 @@ def computer_fire(player_board, computer_board):
             print("Captain we've been hit!")
             player_board[computer_row_fire][computer_column_fire] = "H"
             print(player_board)
-            check_ships_remain(player_board)
+            check_ships_remain(player_board, "player")
         else:
             print("The enemy missed")
             player_board[computer_row_fire][computer_column_fire] = "X"
@@ -195,19 +203,15 @@ def game_select():
     print("10 = 10x10 game board")
     userinput = input("Enter 6 or 10: ")
 
-    print(userinput)
-    print(type(userinput))
+    boardsize = int(userinput)
+    print(type(boardsize))
 
-    if userinput == "6":
-        boardsize = 6
-        print("boardsize", boardsize)
+    if boardsize == 6:
         create_board(boardsize)
-    elif userinput == "10":
-        boardsize = 10
-        print("boardsize", boardsize)
+    elif boardsize == 10:
         create_board(boardsize)
     else:
-        print(f"Sorry {userinput} isn't valid, please enter either 10 or 6")
+        print(f"Sorry {boardsize} isn't valid, please enter either 10 or 6")
         game_select()
 
 
