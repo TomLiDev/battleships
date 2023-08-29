@@ -170,27 +170,14 @@ def create_board(boardsize):
     """
     print("Game board creation")
     blank_board = []
-    if boardsize == 10:
-        blank_board = [[0] * 10 for i in range(10)]
-        print("list board", blank_board)
-        for i in range(len(blank_board)):
-            blank_board[i].insert(0, letters[i])
-            print(blank_board[i])
-        columns = [i for i in range(0, len(blank_board)+1)]
-        print(columns)
-        blank_board.insert(0, columns)
-        place_ship(blank_board)
-
-    elif boardsize == 6:
-        blank_board = [[0] * 6 for i in range(6)]
-        print("list board", blank_board)
-        for i in range(len(blank_board)):
-            blank_board[i].insert(0, letters[i])
-            print(blank_board[i])
-        columns = [i for i in range(0, len(blank_board)+1)]
-        print(columns)
-        blank_board.insert(0, columns)
-        place_ship(blank_board)
+    blank_board = [[0] * boardsize for i in range(boardsize)]
+    for i in range(len(blank_board)):
+        blank_board[i].insert(0, letters[i])
+        print(blank_board[i])
+    columns = [i for i in range(0, len(blank_board)+1)]
+    print(columns)
+    blank_board.insert(0, columns)
+    place_ship(blank_board)
 
 
 def game_select():
