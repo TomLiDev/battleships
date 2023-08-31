@@ -20,14 +20,14 @@ def end_game(who_won):
     """
     if who_won == "player":
         print("Congratulations Captain, you won!")
-        replay = input("Would you like to play again? (y/n): ")
+        replay = input("Would you like to play again? (y/n): \n")
         if replay == "n":
             sys.exit()
         elif replay == "y":
             game_select()
     elif who_won == "computer":
         print("Captain we've been sunk, you lost")
-        replay = input("Would you like to play again? (y/n): ")
+        replay = input("Would you like to play again? (y/n): \n")
         if replay == "n":
             sys.exit()
         elif replay == "y":
@@ -73,7 +73,7 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
     fire on a certain grid reference on the computer board
     """
     print("Where shall we fire captain?")
-    user_grid_fire = input("Enter row,column reference e.g B,3: ")
+    user_grid_fire = input("Enter row,column reference e.g B,3: \n")
     print("Fire reference", user_grid_fire)
     if user_grid_fire in player_shots_store:
         print("Captain we have alrady fired on those coordinates")
@@ -165,7 +165,7 @@ def game_select():
     print("Please select a game board size")
     print("6 = 6x6 game board")
     print("10 = 10x10 game board")
-    userinput = input("Enter 6 or 10: ")
+    userinput = input("Enter 6 or 10: \n")
 
     boardsize = int(userinput)
     print(type(boardsize))
