@@ -11,6 +11,8 @@ SHIPS = [
 ]
 player_shots_store = []
 computer_shots_store = []
+ships_remaining = bool
+players_turn = bool
 
 
 def end_game(who_won):
@@ -46,6 +48,7 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits):
     print(computer_column_fire)
     computer_grid_fire = computer_row_fire, computer_column_fire
     print("computer grid fire", computer_grid_fire)
+
     if computer_grid_fire in computer_shots_store:
         print("computer repeat fire")
         computer_fire(player_board, computer_board, boardsize, p_hits, c_hits)
@@ -57,6 +60,10 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits):
             print("Captain we've been hit!")
             player_board[computer_row_fire][computer_column_fire] = "H"
             c_hits += 1
+            if c_hits == 10:
+                ships_remaining = False
+                print("Ships surviving?", ships_remaining)
+                end_game("computer")
             print("Computer hits", c_hits)
             print("player board from computer fire", player_board)
             player_fire(player_board, computer_board, boardsize,
@@ -65,6 +72,8 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits):
             print("The enemy missed")
             player_fire(player_board, computer_board, boardsize,
                         p_hits, c_hits)
+    players_turn = True
+    return players_turn, ships_remaining
 
 
 def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
@@ -83,6 +92,7 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
         print("Player has fired on", player_shots_store)
         split_fire_reference = user_grid_fire.split(",")
         column_ref = int(split_fire_reference[1])
+        ships_remaining = bool
 
         for row in computer_board:
             if row[0] == split_fire_reference[0]:
@@ -94,6 +104,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
                     print("Player hits", p_hits)
                     print("Computer board from pfire", computer_board)
                     if p_hits == 10:
+                        ships_remaining = False
+                        print("Ships surviving?", ships_remaining)
                         end_game("player")
                     computer_fire(player_board, computer_board, boardsize,
                                   p_hits, c_hits)
@@ -102,7 +114,19 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
                     row[column_ref] = "X"
                     computer_fire(player_board, computer_board, boardsize,
                                   p_hits, c_hits)
-        return computer_board
+    players_turn = False
+    return players_turn, ships_remaining
+
+
+def main_game(player_board, computer_board, boardsize, p_hits, c_hits):
+    print("Enemy ships detected Captain. .")
+    while ships_remaining is not False:
+        if players_turn is True:
+            player_fire(player_board, computer_board, boardsize, p_hits,
+                        c_hits)
+        else:
+            computer_fire(player_board, computer_board, boardsize,
+                          p_hits, c_hits)
 
 
 def place_ship(board, boardsize):
@@ -114,11 +138,9 @@ def place_ship(board, boardsize):
     numbers_to_select = []
     for item in range(boardsize):
         numbers_to_select.append(item)
-    print("Test list of numbers", numbers_to_select)
     for ship in SHIPS:
         temp_ship_length = range(ship["value"])
         ship_length = len(temp_ship_length)
-        print("Actual ship length", ship_length)
         row_number = random.randrange(1, len(numbers_to_select))
         chosen_row = numbers_to_select[row_number]
         end_value = boardsize - ship_length
@@ -127,6 +149,11 @@ def place_ship(board, boardsize):
             board[chosen_row][grid + i] = ship_length
         numbers_to_select.pop(row_number)
     return board
+
+
+def display_board(board):
+    for row in board:
+        print(row)
 
 
 def create_board(boardsize):
@@ -141,19 +168,18 @@ def create_board(boardsize):
     blank_board = [[0] * boardsize for i in range(boardsize)]
     for i in range(len(blank_board)):
         blank_board[i].insert(0, LETTERS[i])
-        print(blank_board[i])
     columns = [i for i in range(0, len(blank_board)+1)]
-    print(columns)
     blank_board.insert(0, columns)
     player_board = copy.deepcopy(blank_board)
     computer_board = copy.deepcopy(blank_board)
     player_board = place_ship(player_board, boardsize)
     computer_board = place_ship(computer_board, boardsize)
-    print("Player board", player_board)
+    print("Player board")
+    display_board(player_board)
     print("Computer board", computer_board)
     p_hits = 0
     c_hits = 0
-    player_fire(player_board, computer_board, boardsize, p_hits, c_hits)
+    main_game(player_board, computer_board, boardsize, p_hits, c_hits)
     return player_board, computer_board, boardsize
 
 
