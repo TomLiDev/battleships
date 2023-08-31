@@ -124,60 +124,28 @@ def player_fire(player_board, computer_board, boardsize):
     return computer_board
 
 
-def place_ship(blank_board, boardsize):
+def place_ship(board, boardsize):
     """
     Function which places ships on the human user and computer gameboard,
     uses ship value in dict to determine length
     """
     print("Ship placement")
-    computer_temp_board = copy.deepcopy(blank_board)
-    player_board = []
-    computer_board = []
-    
-    y = 1
-    while y < 3:
-        y += 1
-        numbers_to_select = []
-        for item in range(boardsize):
-            numbers_to_select.append(item)
-        print("Test list of numbers", numbers_to_select)
-        if y == 2:
-
-            for ship in SHIPS:
-                player_board = blank_board
-                temp_ship_length = range(ship["value"])
-                ship_length = len(temp_ship_length)
-                print("Actual ship length", ship_length)
-                row_number = random.randrange(1, len(numbers_to_select))
-                chosen_row = numbers_to_select[row_number]
-                end_value = boardsize - ship_length
-                grid = random.randrange(1, end_value)
-                for i in range(ship_length):
-                    player_board[chosen_row][grid + i] = ship_length
-                numbers_to_select.pop(row_number)
-                print("ongoing numbers", numbers_to_select)
-
-        elif y == 3:
-
-            for ship in SHIPS:
-                computer_board = computer_temp_board
-                temp_ship_length = range(ship["value"])
-                ship_length = len(temp_ship_length)
-                print("Actual ship length", ship_length)
-
-                print(numbers_to_select)
-                row_number = random.randrange(1, len(numbers_to_select))
-                chosen_row = numbers_to_select[row_number]
-                end_value = boardsize - ship_length
-                grid = random.randrange(1, end_value)
-                for i in range(ship_length):
-                    computer_board[chosen_row][grid + i] = ship_length
-                numbers_to_select.pop(row_number)
-                print("ongoing numbers", numbers_to_select)
-    print("Player board", player_board)
-    print("Computer board", computer_board)
-    player_fire(player_board, computer_board, boardsize)
-    return player_board, computer_board
+    numbers_to_select = []
+    for item in range(boardsize):
+        numbers_to_select.append(item)
+    print("Test list of numbers", numbers_to_select)
+    for ship in SHIPS:
+        temp_ship_length = range(ship["value"])
+        ship_length = len(temp_ship_length)
+        print("Actual ship length", ship_length)
+        row_number = random.randrange(1, len(numbers_to_select))
+        chosen_row = numbers_to_select[row_number]
+        end_value = boardsize - ship_length
+        grid = random.randrange(1, end_value)
+        for i in range(ship_length):
+            board[chosen_row][grid + i] = ship_length
+        numbers_to_select.pop(row_number)
+    return board
 
 
 def create_board(boardsize):
@@ -196,7 +164,13 @@ def create_board(boardsize):
     columns = [i for i in range(0, len(blank_board)+1)]
     print(columns)
     blank_board.insert(0, columns)
-    place_ship(blank_board, boardsize)
+    player_board = copy.deepcopy(blank_board)
+    computer_board = copy.deepcopy(blank_board)
+    player_board = place_ship(player_board, boardsize)
+    computer_board = place_ship(computer_board, boardsize)
+    print("Player board", player_board)
+    print("Computer board", computer_board)
+    return player_board, computer_board
 
 
 def game_select():
