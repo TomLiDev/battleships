@@ -61,17 +61,16 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
         if player_board[computer_row_fire][computer_column_fire] != 0:
             print("Captain we've been hit!")
             player_board[computer_row_fire][computer_column_fire] = "H"
+            print("Enemey hits", c_hits)
             c_hits += 1
             if c_hits == 10:
                 ships_remaining = False
-                print("Ships surviving?", ships_remaining)
                 end_game("computer")
             else:
                 ships_remaining = True
         else:
             print("The enemy missed")
             ships_remaining = True
-        print("Computer hits", c_hits)
         print("player board from computer fire", player_board)
         players_turn = True
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
@@ -110,7 +109,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                     print("Computer board from pfire", computer_board)
                     if p_hits == 10:
                         ships_remaining = False
-                        print("Ships surviving?", ships_remaining)
                         end_game("player")
                     else:
                         ships_remaining = True
@@ -127,7 +125,11 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
 
 def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
               players_turn, ships_remaining):
-    print("Enemy ships detected Captain. .")
+    """
+    Function which controls the player fire, computer fire, and ends the game
+    when no ships are left on one the boards
+    """
+    print("Enemy ships Captain. .")
     while ships_remaining is not False:
         if players_turn is True:
             player_fire(player_board, computer_board, boardsize, p_hits,
@@ -160,6 +162,10 @@ def place_ship(board, boardsize):
 
 
 def display_board(board):
+    """
+    Simple function to be called to show playerboard row by row, making it
+    much easier to see where the computer has fired.
+    """
     for row in board:
         print(row)
 
