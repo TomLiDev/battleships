@@ -11,94 +11,47 @@ SHIPS = [
 ]
 
 
-def check_ships_remain(board, board_name):
-    """
-    Function for checking if there are any remaining ships, if there are none
-    then the game is ended and a winner declared.
-    """
-    print("Full board", board)
-    check_row = [x for x in board[1:]]
-    print("check row", check_row)
-    ships_surviving = 1
-    if ships_surviving == 1:
-        y = 0
-        for row in check_row:
-            second_check = [x for x in row[1:]]
-            for item in second_check:
-                y += 1
-                if item == 4:
-                    print("This is a ship")
-                    ships_surviving += 1
-                    break
-                elif y > 35 and ships_surviving == 1:
-                    print("No ships remaining")
-                    break
-            if ships_surviving == 2:
-                print("Second break")
-                break
-            elif y > 35 and ships_surviving == 1:
-                print("No ships second break")
-                if board_name == "computer":
-                    print("Congratulations Captain, you won!")
-                    replay = input("Would you like to play again? (y/n): ")
-                    if replay == "n":
-                        sys.exit()
-                    elif replay == "y":
-                        game_select()
-                elif board_name == "player":
-                    print("Captain we've been sunk, you lost")
-                    replay = input("Would you like to play again? (y/n): ")
-                    if replay == "n":
-                        sys.exit()
-                    elif replay == "y":
-                        game_select()
-
-        return ships_surviving
+def end_game(who_won):
+    if who_won == "player":
+        print("Congratulations Captain, you won!")
+        replay = input("Would you like to play again? (y/n): ")
+        if replay == "n":
+            sys.exit()
+        elif replay == "y":
+            game_select()
+    elif who_won == "computer":
+        print("Captain we've been sunk, you lost")
+        replay = input("Would you like to play again? (y/n): ")
+        if replay == "n":
+            sys.exit()
+        elif replay == "y":
+            game_select()    
 
 
-def computer_fire(player_board, computer_board, boardsize):
+def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits):
     """
     Function for controlling computer return fire on players board
     Creates random grid references for fire selection
     """
     print("Enemy fire incoming!")
-    print(len(player_board))
-    if len(player_board) == 7:
-        computer_row_fire = random.randrange(1, 7)
-        print(computer_row_fire)
-        computer_column_fire = random.randrange(1, 7)
-        print(computer_column_fire)
+    computer_row_fire = random.randrange(1, boardsize)
+    print(computer_row_fire)
+    computer_column_fire = random.randrange(1, boardsize)
+    print(computer_column_fire)
 
-        if player_board[computer_row_fire][computer_column_fire] != 0:
-            print("Captain we've been hit!")
-            player_board[computer_row_fire][computer_column_fire] = "H"
-            check_ships_remain(player_board, "player")
-            print(player_board)
-        else:
-            print("The enemy missed")
-            player_board[computer_row_fire][computer_column_fire] = "X"
-            print(player_board)
-
-    elif len(player_board) == 11:
-        print(random.randrange(1, 11))
-        computer_row_fire = random.randrange(1, 11)
-        print(computer_row_fire)
-        computer_column_fire = random.randrange(1, 11)
-        print(computer_column_fire)
-
-        if player_board[computer_row_fire][computer_column_fire] != 0:
-            print("Captain we've been hit!")
-            player_board[computer_row_fire][computer_column_fire] = "H"
-            print(player_board)
-            check_ships_remain(player_board, "player")
-        else:
-            print("The enemy missed")
-            player_board[computer_row_fire][computer_column_fire] = "X"
-            print(player_board)
-    player_fire(player_board, computer_board, boardsize)
+    if player_board[computer_row_fire][computer_column_fire] != 0:
+        print("Captain we've been hit!")
+        player_board[computer_row_fire][computer_column_fire] = "H"
+        c_hits += 1
+        print("Computer hits", c_hits)
+        print("player board from computer fire", player_board)
+        player_fire(player_board, computer_board, boardsize, p_hits, c_hits)
+    else:
+        print("The enemy missed")
+        player_fire(player_board, computer_board, boardsize, p_hits, c_hits)
 
 
-def player_fire(player_board, computer_board, boardsize):
+def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
     """
     Function which takes input from player to
     fire on a certain grid reference on the computer board
@@ -115,12 +68,18 @@ def player_fire(player_board, computer_board, boardsize):
             if row[column_ref] != 0:
                 print("Hit! Good shot captain")
                 row[column_ref] = "H"
-                check_ships_remain(computer_board, "computer")
-                computer_fire(player_board, computer_board, boardsize)
+                p_hits += 1
+                print("Player hits", p_hits)
+                print("Computer board from pfire", computer_board)
+                if p_hits == 10:
+                    end_game("player")
+                computer_fire(player_board, computer_board, boardsize,
+                              p_hits, c_hits)
             else:
                 print("You missed")
                 row[column_ref] = "X"
-                computer_fire(player_board, computer_board, boardsize)
+                computer_fire(player_board, computer_board, boardsize,
+                              p_hits, c_hits)
     return computer_board
 
 
@@ -170,7 +129,10 @@ def create_board(boardsize):
     computer_board = place_ship(computer_board, boardsize)
     print("Player board", player_board)
     print("Computer board", computer_board)
-    return player_board, computer_board
+    p_hits = 0
+    c_hits = 0
+    player_fire(player_board, computer_board, boardsize, p_hits, c_hits)
+    return player_board, computer_board, boardsize
 
 
 def game_select():
