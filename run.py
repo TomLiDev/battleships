@@ -15,19 +15,19 @@ ships_remaining = bool
 players_turn = bool
 
 
-def end_game(who_won):
+def end_game(c_hits, p_hits):
     """
     Function which is called when either computer or player hit counter
     reaches 10, signalling all ships have been sunk.
     """
-    if who_won == "player":
+    if p_hits > c_hits:
         print("Congratulations Captain, you won!")
         replay = input("Would you like to play again? (y/n): \n")
         if replay == "n":
             sys.exit()
         elif replay == "y":
             game_select()
-    elif who_won == "computer":
+    else:
         print("Captain we've been sunk, you lost")
         replay = input("Would you like to play again? (y/n): \n")
         if replay == "n":
@@ -65,7 +65,6 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             c_hits += 1
             if c_hits == 10:
                 ships_remaining = False
-                end_game("computer")
             else:
                 ships_remaining = True
         else:
@@ -109,7 +108,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                     print("Computer board from pfire", computer_board)
                     if p_hits == 10:
                         ships_remaining = False
-                        end_game("player")
                     else:
                         ships_remaining = True
                 else:
@@ -127,7 +125,7 @@ def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
               players_turn, ships_remaining):
     """
     Function which controls the player fire, computer fire, and ends the game
-    when no ships are left on one the boards
+    when no ships are left on one of the boards
     """
     print("Enemy ships Captain. .")
     while ships_remaining is not False:
@@ -137,6 +135,7 @@ def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
         else:
             computer_fire(player_board, computer_board, boardsize, p_hits,
                           c_hits, players_turn, ships_remaining)
+    end_game(c_hits, p_hits)
 
 
 def place_ship(board, boardsize):
