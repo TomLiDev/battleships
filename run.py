@@ -36,7 +36,8 @@ def end_game(who_won):
             game_select()
 
 
-def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits):
+def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
+                  players_turn, ships_remaining):
     """
     Function for controlling computer return fire on players board
     Creates random grid references for fire selection
@@ -51,7 +52,8 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits):
 
     if computer_grid_fire in computer_shots_store:
         print("computer repeat fire")
-        computer_fire(player_board, computer_board, boardsize, p_hits, c_hits)
+        computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
+                      players_turn, ships_remaining)
     else:
         computer_shots_store.append(computer_grid_fire)
         print("computer has fired on", computer_shots_store)
@@ -64,19 +66,21 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits):
                 ships_remaining = False
                 print("Ships surviving?", ships_remaining)
                 end_game("computer")
-            print("Computer hits", c_hits)
-            print("player board from computer fire", player_board)
-            player_fire(player_board, computer_board, boardsize,
-                        p_hits, c_hits)
+            else:
+                ships_remaining = True
         else:
             print("The enemy missed")
-            player_fire(player_board, computer_board, boardsize,
-                        p_hits, c_hits)
-    players_turn = True
+            ships_remaining = True
+        print("Computer hits", c_hits)
+        print("player board from computer fire", player_board)
+        players_turn = True
+    main_game(player_board, computer_board, boardsize, p_hits, c_hits,
+              players_turn, ships_remaining)
     return players_turn, ships_remaining
 
 
-def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
+def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
+                players_turn, ships_remaining):
     """
     Function which takes input from player to
     fire on a certain grid reference on the computer board
@@ -86,7 +90,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
     print("Fire reference", user_grid_fire)
     if user_grid_fire in player_shots_store:
         print("Captain we have alrady fired on those coordinates")
-        player_fire(player_board, computer_board, boardsize, p_hits, c_hits)
+        player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
+                    players_turn, ships_remaining)
     else:
         player_shots_store.append(user_grid_fire)
         print("Player has fired on", player_shots_store)
@@ -107,26 +112,29 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
                         ships_remaining = False
                         print("Ships surviving?", ships_remaining)
                         end_game("player")
-                    computer_fire(player_board, computer_board, boardsize,
-                                  p_hits, c_hits)
+                    else:
+                        ships_remaining = True
                 else:
                     print("You missed")
                     row[column_ref] = "X"
-                    computer_fire(player_board, computer_board, boardsize,
-                                  p_hits, c_hits)
+                    ships_remaining = True
+
     players_turn = False
+    main_game(player_board, computer_board, boardsize, p_hits, c_hits,
+              players_turn, ships_remaining)
     return players_turn, ships_remaining
 
 
-def main_game(player_board, computer_board, boardsize, p_hits, c_hits):
+def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
+              players_turn, ships_remaining):
     print("Enemy ships detected Captain. .")
     while ships_remaining is not False:
         if players_turn is True:
             player_fire(player_board, computer_board, boardsize, p_hits,
-                        c_hits)
+                        c_hits, players_turn, ships_remaining)
         else:
-            computer_fire(player_board, computer_board, boardsize,
-                          p_hits, c_hits)
+            computer_fire(player_board, computer_board, boardsize, p_hits,
+                          c_hits, players_turn, ships_remaining)
 
 
 def place_ship(board, boardsize):
@@ -179,7 +187,10 @@ def create_board(boardsize):
     print("Computer board", computer_board)
     p_hits = 0
     c_hits = 0
-    main_game(player_board, computer_board, boardsize, p_hits, c_hits)
+    players_turn = True
+    ships_remaining = True
+    main_game(player_board, computer_board, boardsize, p_hits, c_hits,
+              players_turn, ships_remaining)
     return player_board, computer_board, boardsize
 
 
