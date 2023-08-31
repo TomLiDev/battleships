@@ -9,9 +9,15 @@ SHIPS = [
     {"name": "Destroyer", "value": 2},
     {"name": "Submarine", "value": 1}
 ]
+player_shots_store = []
+computer_shots_store = []
 
 
 def end_game(who_won):
+    """
+    Function which is called when either computer or player hit counter
+    reaches 10, signalling all ships have been sunk.
+    """
     if who_won == "player":
         print("Congratulations Captain, you won!")
         replay = input("Would you like to play again? (y/n): ")
@@ -25,7 +31,7 @@ def end_game(who_won):
         if replay == "n":
             sys.exit()
         elif replay == "y":
-            game_select()    
+            game_select()
 
 
 def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits):
@@ -38,17 +44,27 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits):
     print(computer_row_fire)
     computer_column_fire = random.randrange(1, boardsize)
     print(computer_column_fire)
-
-    if player_board[computer_row_fire][computer_column_fire] != 0:
-        print("Captain we've been hit!")
-        player_board[computer_row_fire][computer_column_fire] = "H"
-        c_hits += 1
-        print("Computer hits", c_hits)
-        print("player board from computer fire", player_board)
-        player_fire(player_board, computer_board, boardsize, p_hits, c_hits)
+    computer_grid_fire = computer_row_fire, computer_column_fire
+    print("computer grid fire", computer_grid_fire)
+    if computer_grid_fire in computer_shots_store:
+        print("computer repeat fire")
+        computer_fire(player_board, computer_board, boardsize, p_hits, c_hits)
     else:
-        print("The enemy missed")
-        player_fire(player_board, computer_board, boardsize, p_hits, c_hits)
+        computer_shots_store.append(computer_grid_fire)
+        print("computer has fired on", computer_shots_store)
+
+        if player_board[computer_row_fire][computer_column_fire] != 0:
+            print("Captain we've been hit!")
+            player_board[computer_row_fire][computer_column_fire] = "H"
+            c_hits += 1
+            print("Computer hits", c_hits)
+            print("player board from computer fire", player_board)
+            player_fire(player_board, computer_board, boardsize,
+                        p_hits, c_hits)
+        else:
+            print("The enemy missed")
+            player_fire(player_board, computer_board, boardsize,
+                        p_hits, c_hits)
 
 
 def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
@@ -59,28 +75,34 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits):
     print("Where shall we fire captain?")
     user_grid_fire = input("Enter row,column reference e.g B,3: ")
     print("Fire reference", user_grid_fire)
-    split_fire_reference = user_grid_fire.split(",")
-    column_ref = int(split_fire_reference[1])
+    if user_grid_fire in player_shots_store:
+        print("Captain we have alrady fired on those coordinates")
+        player_fire(player_board, computer_board, boardsize, p_hits, c_hits)
+    else:
+        player_shots_store.append(user_grid_fire)
+        print("Player has fired on", player_shots_store)
+        split_fire_reference = user_grid_fire.split(",")
+        column_ref = int(split_fire_reference[1])
 
-    for row in computer_board:
-        if row[0] == split_fire_reference[0]:
-            print("This row", row[0], split_fire_reference[0])
-            if row[column_ref] != 0:
-                print("Hit! Good shot captain")
-                row[column_ref] = "H"
-                p_hits += 1
-                print("Player hits", p_hits)
-                print("Computer board from pfire", computer_board)
-                if p_hits == 10:
-                    end_game("player")
-                computer_fire(player_board, computer_board, boardsize,
-                              p_hits, c_hits)
-            else:
-                print("You missed")
-                row[column_ref] = "X"
-                computer_fire(player_board, computer_board, boardsize,
-                              p_hits, c_hits)
-    return computer_board
+        for row in computer_board:
+            if row[0] == split_fire_reference[0]:
+                print("This row", row[0], split_fire_reference[0])
+                if row[column_ref] != 0:
+                    print("Hit! Good shot captain")
+                    row[column_ref] = "H"
+                    p_hits += 1
+                    print("Player hits", p_hits)
+                    print("Computer board from pfire", computer_board)
+                    if p_hits == 10:
+                        end_game("player")
+                    computer_fire(player_board, computer_board, boardsize,
+                                  p_hits, c_hits)
+                else:
+                    print("You missed")
+                    row[column_ref] = "X"
+                    computer_fire(player_board, computer_board, boardsize,
+                                  p_hits, c_hits)
+        return computer_board
 
 
 def place_ship(board, boardsize):
