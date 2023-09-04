@@ -84,6 +84,14 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     fire on a certain grid reference on the computer board
     """
     print("Where shall we fire captain?")
+    if boardsize == 6:
+        print("Please enter a row and column reference \n"
+              "the row reference must be A - F\n"
+              "and the column reference be 1 - 6 \n")
+    else:
+        print("Please enter a row and column reference \n"
+              "the row reference must be A - J\n"
+              "and the column reference be 1 - 10\n")
     user_grid_fire = input("Enter row,column reference e.g B,3: \n")
     print("Fire reference", user_grid_fire)
     if user_grid_fire in player_shots_store:
@@ -91,29 +99,36 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
         player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                     players_turn, ships_remaining)
     else:
-        player_shots_store.append(user_grid_fire)
-        print("Player has fired on", player_shots_store)
-        split_fire_reference = user_grid_fire.split(",")
-        column_ref = int(split_fire_reference[1])
-        ships_remaining = bool
+        try:
+            player_shots_store.append(user_grid_fire)
+            split_fire_reference = user_grid_fire.split(",")
+            column_ref = int(split_fire_reference[1])
+            ships_remaining = bool
 
-        for row in computer_board:
-            if row[0] == split_fire_reference[0]:
-                print("This row", row[0], split_fire_reference[0])
-                if row[column_ref] != 0:
-                    print("Hit! Good shot captain")
-                    row[column_ref] = "H"
-                    p_hits += 1
-                    print("Player hits", p_hits)
-                    print("Computer board from pfire", computer_board)
-                    if p_hits == 10:
-                        ships_remaining = False
+            for row in computer_board:
+                if row[0] == split_fire_reference[0]:
+                    print("This row", row[0], split_fire_reference[0])
+                    if row[column_ref] != 0:
+                        print("Hit! Good shot captain")
+                        row[column_ref] = "H"
+                        p_hits += 1
+                        print("Player hits", p_hits)
+                        print("Computer board from pfire", computer_board)
+                        if p_hits == 10:
+                            ships_remaining = False
+                        else:
+                            ships_remaining = True
                     else:
+                        print("You missed")
+                        row[column_ref] = "X"
                         ships_remaining = True
-                else:
-                    print("You missed")
-                    row[column_ref] = "X"
-                    ships_remaining = True
+            print("Player has fired on", player_shots_store)
+        except IndexError:
+            print("Invalid fire coordinates Captain")
+            print("please enter coordinates in the format described with \n"
+                  "values within the board")
+            player_fire(player_board, computer_board, boardsize, p_hits,
+                        c_hits, players_turn, ships_remaining)
 
     players_turn = False
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
