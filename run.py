@@ -1,6 +1,7 @@
 import random
 import copy
 import sys
+from colorama import Fore, Back, Style
 
 LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 SHIPS = [
@@ -21,14 +22,16 @@ def end_game(c_hits, p_hits):
     reaches 10, signalling all ships have been sunk.
     """
     if p_hits > c_hits:
-        print("Congratulations Captain, you won!")
+        print(Fore.GREEN + "Congratulations Captain, you won!")
+        print(Style.RESET_ALL)
         replay = input("Would you like to play again? (y/n): \n")
         if replay == "n":
             sys.exit()
         elif replay == "y":
             game_select()
     else:
-        print("Captain we've been sunk, you lost")
+        print(Fore.RED + "Captain we've been sunk, you lost")
+        print(Style.RESET_ALL)
         replay = input("Would you like to play again? (y/n): \n")
         if replay == "n":
             sys.exit()
@@ -42,7 +45,8 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     Function for controlling computer return fire on players board
     Creates random grid references for fire selection
     """
-    print("Enemy fire incoming!")
+    print(Fore.RED + "Enemy fire incoming!")
+    print(Style.RESET_ALL)
     computer_row_fire = random.randrange(1, boardsize)
     print(computer_row_fire)
     computer_column_fire = random.randrange(1, boardsize)
@@ -59,7 +63,8 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
         print("computer has fired on", computer_shots_store)
 
         if player_board[computer_row_fire][computer_column_fire] != 0:
-            print("Captain we've been hit!")
+            print(Fore.RED + "Captain we've been hit!")
+            print(Style.RESET_ALL)
             player_board[computer_row_fire][computer_column_fire] = "H"
             print("Enemey hits", c_hits)
             c_hits += 1
@@ -83,7 +88,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     Function which takes input from player to
     fire on a certain grid reference on the computer board
     """
-    print("Where shall we fire captain?")
+    print(Fore.GREEN + "Where shall we fire captain?")
+    print(Style.RESET_ALL)
     if boardsize == 6:
         print("Please enter a row and column reference \n"
               "the row reference must be A - F\n"
@@ -95,7 +101,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     user_grid_fire = input("Enter row,column reference e.g B,3: \n")
     print("Fire reference", user_grid_fire)
     if user_grid_fire in player_shots_store:
-        print("Captain we have alrady fired on those coordinates")
+        print(Fore.GREEN + "Captain we have alrady fired on those coordinates")
+        print(Style.RESET_ALL)
         player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                     players_turn, ships_remaining)
     else:
@@ -124,7 +131,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                         ships_remaining = True
             print("Player has fired on", player_shots_store)
         except IndexError:
-            print("Invalid fire coordinates Captain")
+            print(Fore.GREEN + "Invalid fire coordinates Captain")
+            print(Style.RESET_ALL)
             print("please enter coordinates in the format described with \n"
                   "values within the board")
             player_fire(player_board, computer_board, boardsize, p_hits,
@@ -142,7 +150,8 @@ def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
     Function which controls the player fire, computer fire, and ends the game
     when no ships are left on one of the boards
     """
-    print("Enemy ships Captain. .")
+    print(Fore.RED + "Enemy ships Captain. .")
+    print(Style.RESET_ALL)
     while ships_remaining is not False:
         if players_turn is True:
             player_fire(player_board, computer_board, boardsize, p_hits,
@@ -158,7 +167,6 @@ def place_ship(board, boardsize):
     Function which places ships on the human user and computer gameboard,
     uses ship value in dict to determine length
     """
-    print("Ship placement")
     numbers_to_select = []
     for item in range(boardsize):
         numbers_to_select.append(item)
@@ -236,5 +244,6 @@ def game_select():
         game_select()
 
 
-print("Welcome to Battleships!")
+print(Back.CYAN, Fore.WHITE + "Welcome to Battleships!")
+print(Style.RESET_ALL)
 game_select()
