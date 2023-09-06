@@ -1,6 +1,7 @@
 import random
 import copy
 import sys
+import colorama
 from colorama import Fore, Back, Style
 import emoji
 
@@ -25,6 +26,7 @@ def end_game(c_hits, p_hits):
     if p_hits > c_hits:
         print(Fore.GREEN + "Congratulations Captain, you won!")
         print(Style.RESET_ALL)
+        print(emoji.emojize(":grinning_face_with_big_eyes:"))
         replay = input("Would you like to play again? (y/n): \n")
         if replay == "n":
             sys.exit()
@@ -41,7 +43,7 @@ def end_game(c_hits, p_hits):
 
 
 def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
-                  players_turn, ships_remaining):
+                  players_turn, ships_remaining, computer_board_for_player):
     """
     Function for controlling computer return fire on players board
     Creates random grid references for fire selection
@@ -58,7 +60,7 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     if computer_grid_fire in computer_shots_store:
         print("computer repeat fire")
         computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
-                      players_turn, ships_remaining)
+                      players_turn, ships_remaining, computer_board_for_player)
     else:
         computer_shots_store.append(computer_grid_fire)
         print("computer has fired on", computer_shots_store)
@@ -67,8 +69,8 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             print(Fore.RED + "Captain we've been hit!")
             print(Style.RESET_ALL)
             player_board[computer_row_fire][computer_column_fire] = "H"
-            print("Enemey hits", c_hits)
             c_hits += 1
+            print("Enemey hits", c_hits)
             if c_hits == 10:
                 ships_remaining = False
             else:
@@ -79,12 +81,12 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
         print("player board from computer fire", player_board)
         players_turn = True
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
-              players_turn, ships_remaining)
+              players_turn, ships_remaining, computer_board_for_player)
     return players_turn, ships_remaining
 
 
 def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
-                players_turn, ships_remaining):
+                players_turn, ships_remaining, computer_board_for_player):
     """
     Function which takes input from player to
     fire on a certain grid reference on the computer board
@@ -105,7 +107,7 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
         print(Fore.GREEN + "Captain we have alrady fired on those coordinates")
         print(Style.RESET_ALL)
         player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
-                    players_turn, ships_remaining)
+                    players_turn, ships_remaining, computer_board_for_player)
     else:
         try:
             player_shots_store.append(user_grid_fire)
@@ -115,6 +117,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
 
             for row in computer_board:
                 if row[0] == split_fire_reference[0]:
+                    row_ref = computer_board.index(row)
+                    print("Row ref", row_ref)
                     print("This row", row[0], split_fire_reference[0])
                     if row[column_ref] != 0:
                         print("Hit! Good shot captain")
@@ -122,6 +126,9 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                         p_hits += 1
                         print("Player hits", p_hits)
                         print("Computer board from pfire", computer_board)
+                        computer_board_for_player[row_ref][column_ref] = "H"
+                        print("C board for player from pfire",
+                              computer_board_for_player)
                         if p_hits == 10:
                             ships_remaining = False
                         else:
@@ -129,6 +136,7 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                     else:
                         print("You missed")
                         row[column_ref] = "X"
+                        computer_board_for_player[row_ref][column_ref] = "X"
                         ships_remaining = True
             print("Player has fired on", player_shots_store)
         except IndexError:
@@ -137,16 +145,23 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             print("please enter coordinates in the format described with \n"
                   "values within the board")
             player_fire(player_board, computer_board, boardsize, p_hits,
-                        c_hits, players_turn, ships_remaining)
+                        c_hits, players_turn, ships_remaining,
+                        computer_board_for_player)
 
+    print(Fore.GREEN + "Our ship positions Captain")
+    print(Style.RESET_ALL)
+    display_board(player_board)
+    print(Fore.GREEN + "This is where we have fired Captain")
+    print(Style.RESET_ALL)
+    display_board(computer_board_for_player)
     players_turn = False
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
-              players_turn, ships_remaining)
+              players_turn, ships_remaining, computer_board_for_player)
     return players_turn, ships_remaining
 
 
 def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
-              players_turn, ships_remaining):
+              players_turn, ships_remaining, computer_board_for_player):
     """
     Function which controls the player fire, computer fire, and ends the game
     when no ships are left on one of the boards
@@ -156,10 +171,12 @@ def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
     while ships_remaining is not False:
         if players_turn is True:
             player_fire(player_board, computer_board, boardsize, p_hits,
-                        c_hits, players_turn, ships_remaining)
+                        c_hits, players_turn, ships_remaining,
+                        computer_board_for_player)
         else:
             computer_fire(player_board, computer_board, boardsize, p_hits,
-                          c_hits, players_turn, ships_remaining)
+                          c_hits, players_turn, ships_remaining,
+                          computer_board_for_player)
     end_game(c_hits, p_hits)
 
 
@@ -221,7 +238,7 @@ def create_board(boardsize):
     players_turn = True
     ships_remaining = True
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
-              players_turn, ships_remaining)
+              players_turn, ships_remaining, computer_board_for_player)
     return player_board, computer_board, boardsize
 
 
@@ -236,7 +253,6 @@ def game_select():
     userinput = input("Enter 6 or 10: \n")
 
     boardsize = int(userinput)
-    print(type(boardsize))
 
     if boardsize == 6:
         create_board(boardsize)
