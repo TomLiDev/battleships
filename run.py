@@ -52,9 +52,7 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     print(Fore.RED + "Enemy fire incoming!")
     print(Style.RESET_ALL)
     computer_row_fire = random.randrange(1, boardsize)
-    print(computer_row_fire)
     computer_column_fire = random.randrange(1, boardsize)
-    print(computer_column_fire)
     computer_grid_fire = computer_row_fire, computer_column_fire
     print("computer grid fire", computer_grid_fire)
 
@@ -71,10 +69,10 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             print(Style.RESET_ALL)
             ship_value = player_board[computer_row_fire][computer_column_fire]
             print("ship value", ship_value)
-            check_ship_sunk(ship_value, computer_board, boardsize)
             player_board[computer_row_fire][computer_column_fire] = "H"
+            check_ship_sunk(ship_value, computer_board, boardsize)
             c_hits += 1
-            print("Enemey hits", c_hits)
+            print("Enemy hits", c_hits)
             if c_hits == 10:
                 ships_remaining = False
             else:
@@ -84,6 +82,7 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             ships_remaining = True
         print("player board from computer fire", player_board)
         players_turn = True
+
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
               players_turn, ships_remaining, computer_board_for_player)
     return players_turn, ships_remaining
@@ -122,10 +121,10 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             for row in computer_board:
                 if row[0] == split_fire_reference[0]:
                     row_ref = computer_board.index(row)
-                    print("Row ref", row_ref)
-                    print("This row", row[0], split_fire_reference[0])
                     if row[column_ref] != 0:
-                        print("Hit! Good shot captain")
+                        print(Fore.GREEN + "Hit! Good shot Captain",
+                              emoji.emojize(":grinning_face_with_big_eyes:"))
+                        print(Style.RESET_ALL)
                         ship_value = row[column_ref]
                         print("ship value", ship_value)
                         row[column_ref] = "H"
@@ -134,8 +133,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                         print("Player hits", p_hits)
                         print("Computer board from pfire", computer_board)
                         computer_board_for_player[row_ref][column_ref] = "H"
-                        print("C board for player from pfire",
-                              computer_board_for_player)
                         if p_hits == 10:
                             ships_remaining = False
                         else:
@@ -155,12 +152,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                         c_hits, players_turn, ships_remaining,
                         computer_board_for_player)
 
-    print(Fore.GREEN + "Our ship positions Captain")
-    print(Style.RESET_ALL)
-    display_board(player_board)
-    print(Fore.GREEN + "This is where we have fired Captain")
-    print(Style.RESET_ALL)
-    display_board(computer_board_for_player)
     players_turn = False
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
               players_turn, ships_remaining, computer_board_for_player)
@@ -170,7 +161,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
 def check_ship_sunk(ship_value, board, boardsize):
     print("Checking for sunk ship")
     y = boardsize*boardsize
-    print("Total board", y)
     x = 0
     board_ship_check = board[1:]
     ship_sunk = bool
@@ -178,8 +168,6 @@ def check_ship_sunk(ship_value, board, boardsize):
         row_ship_check = row[1:]
         for item in row_ship_check:
             x += 1
-            print(x)
-            print("item", item)
             if item == ship_value:
                 print("Ship remaining")
                 ship_sunk = False
@@ -200,6 +188,12 @@ def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
     print(Style.RESET_ALL)
     while ships_remaining is not False:
         if players_turn is True:
+            print(Fore.GREEN + "Our ship positions Captain")
+            print(Style.RESET_ALL)
+            display_board(player_board)
+            print(Fore.GREEN + "This is where we have fired Captain")
+            print(Style.RESET_ALL)
+            display_board(computer_board_for_player)
             player_fire(player_board, computer_board, boardsize, p_hits,
                         c_hits, players_turn, ships_remaining,
                         computer_board_for_player)
@@ -293,7 +287,7 @@ def game_select():
         game_select()
 
 
-print(Back.CYAN, Fore.WHITE + "Welcome to Battleships!")
+print(Back.CYAN, Fore.WHITE + "Welcome to Battleships!",
+      emoji.emojize(":grinning_face_with_big_eyes:"))
 print(Style.RESET_ALL)
-print(emoji.emojize(":grinning_face_with_big_eyes:"))
 game_select()
