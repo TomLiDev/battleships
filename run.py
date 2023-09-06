@@ -2,6 +2,7 @@ import random
 import copy
 import sys
 from colorama import Fore, Back, Style
+import emoji
 
 LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 SHIPS = [
@@ -208,8 +209,10 @@ def create_board(boardsize):
     blank_board.insert(0, columns)
     player_board = copy.deepcopy(blank_board)
     computer_board = copy.deepcopy(blank_board)
+    computer_board_for_player = copy.deepcopy(blank_board)
     player_board = place_ship(player_board, boardsize)
     computer_board = place_ship(computer_board, boardsize)
+    print("Blank computer board", computer_board_for_player)
     print("Player board")
     display_board(player_board)
     print("Computer board", computer_board)
@@ -246,4 +249,5 @@ def game_select():
 
 print(Back.CYAN, Fore.WHITE + "Welcome to Battleships!")
 print(Style.RESET_ALL)
+print(emoji.emojize(":grinning_face_with_big_eyes:"))
 game_select()
