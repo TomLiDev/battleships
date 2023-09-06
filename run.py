@@ -128,7 +128,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                         ship_value = row[column_ref]
                         print("ship value", ship_value)
                         row[column_ref] = "H"
-                        check_ship_sunk(ship_value, computer_board, boardsize)
+                        check_ship_sunk(ship_value, computer_board, boardsize,
+                                        True)
                         p_hits += 1
                         print("Player hits", p_hits)
                         print("Computer board from pfire", computer_board)
@@ -158,7 +159,9 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     return players_turn, ships_remaining
 
 
-def check_ship_sunk(ship_value, board, boardsize):
+def check_ship_sunk(ship_value, board, boardsize, is_player):
+    """
+    """
     print("Checking for sunk ship")
     y = boardsize*boardsize
     x = 0
@@ -231,7 +234,13 @@ def display_board(board):
     much easier to see where the computer has fired.
     """
     for row in board:
-        print(row)
+        x = 0
+        for char in row:
+            x += 1
+            if x < len(row):
+                print(char, end=" ")
+            else:
+                print(char)   
 
 
 def create_board(boardsize):
