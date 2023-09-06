@@ -5,6 +5,7 @@ import colorama
 from colorama import Fore, Back, Style
 import emoji
 
+
 LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 SHIPS = [
     {"name": "Battleship", "value": 4},
@@ -68,6 +69,9 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
         if player_board[computer_row_fire][computer_column_fire] != 0:
             print(Fore.RED + "Captain we've been hit!")
             print(Style.RESET_ALL)
+            ship_value = player_board[computer_row_fire][computer_column_fire]
+            print("ship value", ship_value)
+            check_ship_sunk(ship_value, computer_board, boardsize)
             player_board[computer_row_fire][computer_column_fire] = "H"
             c_hits += 1
             print("Enemey hits", c_hits)
@@ -122,7 +126,10 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                     print("This row", row[0], split_fire_reference[0])
                     if row[column_ref] != 0:
                         print("Hit! Good shot captain")
+                        ship_value = row[column_ref]
+                        print("ship value", ship_value)
                         row[column_ref] = "H"
+                        check_ship_sunk(ship_value, computer_board, boardsize)
                         p_hits += 1
                         print("Player hits", p_hits)
                         print("Computer board from pfire", computer_board)
@@ -158,6 +165,29 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
               players_turn, ships_remaining, computer_board_for_player)
     return players_turn, ships_remaining
+
+
+def check_ship_sunk(ship_value, board, boardsize):
+    print("Checking for sunk ship")
+    y = boardsize*boardsize
+    print("Total board", y)
+    x = 0
+    board_ship_check = board[1:]
+    ship_sunk = bool
+    for row in board_ship_check:
+        row_ship_check = row[1:]
+        for item in row_ship_check:
+            x += 1
+            print(x)
+            print("item", item)
+            if item == ship_value:
+                print("Ship remaining")
+                ship_sunk = False
+                break
+            elif x == y:
+                print("Ship sunk")
+        if ship_sunk is False:
+            break
 
 
 def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
