@@ -70,7 +70,7 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             ship_value = player_board[computer_row_fire][computer_column_fire]
             print("ship value", ship_value)
             player_board[computer_row_fire][computer_column_fire] = "H"
-            check_ship_sunk(ship_value, computer_board, boardsize)
+            check_ship_sunk(ship_value, computer_board, boardsize, True)
             c_hits += 1
             print("Enemy hits", c_hits)
             if c_hits == 10:
@@ -176,7 +176,12 @@ def check_ship_sunk(ship_value, board, boardsize, is_player):
                 ship_sunk = False
                 break
             elif x == y:
-                print("Ship sunk")
+                if is_player is True:
+                    print(Fore.GREEN + "We sunk an enemy ship!")
+                    print(Style.RESET_ALL)
+                else:
+                    print(Fore.RED + "The enemy sunk one of our ships!")
+                    print(Style.RESET_ALL)
         if ship_sunk is False:
             break
 
@@ -240,7 +245,7 @@ def display_board(board):
             if x < len(row):
                 print(char, end=" ")
             else:
-                print(char)   
+                print(char)
 
 
 def create_board(boardsize):
