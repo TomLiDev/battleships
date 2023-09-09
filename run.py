@@ -1,10 +1,8 @@
 import random
 import copy
 import sys
-import colorama
 from colorama import Fore, Back, Style
 import emoji
-
 
 LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 SHIPS = [
@@ -88,11 +86,11 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     return players_turn, ships_remaining
 
 
-def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
-                players_turn, ships_remaining, computer_board_for_player):
+def fire_instructions(boardsize):
     """
-    Function which takes input from player to
-    fire on a certain grid reference on the computer board
+    Function which displays different instructions for entering fire
+    coordinates based on the boardsize. Used to simplify and shorten
+    player fire function.
     """
     print(Fore.GREEN + "Where shall we fire captain?")
     print(Style.RESET_ALL)
@@ -100,10 +98,18 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
         print("Please enter a row and column reference \n"
               "the row reference must be A - F\n"
               "and the column reference be 1 - 6 \n")
-    else:
+    elif boardsize == 10:
         print("Please enter a row and column reference \n"
               "the row reference must be A - J\n"
               "and the column reference be 1 - 10\n")
+
+
+def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
+                players_turn, ships_remaining, computer_board_for_player):
+    """
+    Function which takes input from player to
+    fire on a certain grid reference on the computer board
+    """
     user_grid_fire = input("Enter row,column reference e.g B,3: \n")
     print("Fire reference", user_grid_fire)
     if user_grid_fire in player_shots_store:
@@ -161,6 +167,9 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
 
 def check_ship_sunk(ship_value, board, boardsize, is_player):
     """
+    Function which checks whether or not a ship has been sunk after a hit.
+    Takes the hit ship value and scans the remaining board to see if that
+    value is still present or not.
     """
     print("Checking for sunk ship")
     y = boardsize*boardsize
@@ -202,6 +211,7 @@ def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
             print(Fore.GREEN + "This is where we have fired Captain")
             print(Style.RESET_ALL)
             display_board(computer_board_for_player)
+            fire_instructions(boardsize)
             player_fire(player_board, computer_board, boardsize, p_hits,
                         c_hits, players_turn, ships_remaining,
                         computer_board_for_player)
