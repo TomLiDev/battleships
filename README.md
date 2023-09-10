@@ -140,15 +140,7 @@ Horizontal and Vertical Ship Placement - It would be good to build on the existi
 
 ### Accessibility
 
-This site has been built to be as accessible as possible, specifically:
-
-- All images have alt text attributes and all links have aria labels for use by screen readers.
-
-- The colour scheme has been chosen to ensure a good level of contrast is maintained for text across the site.
-
-- Semantic markup has been used throughout.
-
-- Including hover states to aid navigation.
+As a command line project there are few options to improve or consider accessibility, however care has been taken to ensure that good contrast is maintained when coloured text is used. 
 
 ## Technologies Used
 
@@ -182,15 +174,15 @@ This was website was deployed using Heroku. Instructions to do this are:
 
 1. Go to Github and Log in (or sign up).
 
-2. Find the repository for this project, TomLiDev/Space-Quiz-Pilot-Assessment.
+2. Find the repository for this project, TomLiDev/battleships
 
-3. Click on the Settings link.
+3. Copy the code from the repository into your IDE
 
-4. Click on the Pages link in the left hand side navigation bar.
+4. In your IDE, create the requirements.txt doc with the pip3 > freeze command, ensuring the requirements.txt is named exactly that. 
 
-5. In the Source section, choose main from the drop down select branch menu. Select Root from the drop down select folder menu.
+5. Go to Heroku, and log in (or sign up)
 
-6. Click Save. Your live Github Pages site is now deployed at the URL shown.
+6. Create a
 
 ## Local Development
 
@@ -226,29 +218,15 @@ Please see seperate testing.md for full details.
 
 The following sites were used for information/code:
 
-####
+#### List comprehension for correct game board creation
 
-#### Fisher-Yates Shuffle Algorithm
-
-https://stackoverflow.com/questions/59810241/how-to-fisher-yates-shuffle-a-javascript-array
-
-#### Session Storage
-
-https://www.w3schools.com/jsref/prop_win_sessionstorage.asp
-
-#### Sorting Array of Objects Based on Shared Object Property
-
-https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+https://nedbatchelder.com/blog/201308/names_and_values_making_a_game_board.html
 
 ### Content
 
 The majority of the content was created by the author.
 
-This site was used for the background image:
-https://free4kwallpapers.com/space/space-background-wallpaper--27kA
-
-Some of the quiz questions came from this site:
-https://icebreakerideas.com/space-trivia/
+The emojis displayed with some of the messages are accessed via the imported emoji library. 
 
 ## Acknowledgements
 
