@@ -42,7 +42,7 @@ def end_game(c_hits, p_hits):
 
 
 def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
-                  ships_remaining, computer_board_for_player):
+                  players_turn, ships_remaining, computer_board_for_player):
     """
     Function for controlling computer return fire on players board
     Creates random grid references for fire selection
@@ -57,7 +57,7 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     if computer_grid_fire in computer_shots_store:
         print("computer repeat fire")
         computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
-                      ships_remaining, computer_board_for_player)
+                      players_turn, ships_remaining, computer_board_for_player)
     else:
         computer_shots_store.append(computer_grid_fire)
         print("computer has fired on", computer_shots_store)
@@ -83,7 +83,7 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
 
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
               players_turn, ships_remaining, computer_board_for_player)
-    return players_turn, ships_remaining, player_board
+    return players_turn, ships_remaining
 
 
 def fire_instructions(boardsize):
@@ -104,8 +104,8 @@ def fire_instructions(boardsize):
               "and the column reference be 1 - 10\n")
 
 
-def player_fire(computer_board, boardsize, p_hits, c_hits,
-                ships_remaining, computer_board_for_player):
+def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
+                players_turn, ships_remaining, computer_board_for_player):
     """
     Function which takes input from player to
     fire on a certain grid reference on the computer board
@@ -115,8 +115,8 @@ def player_fire(computer_board, boardsize, p_hits, c_hits,
     if user_grid_fire in player_shots_store:
         print(Fore.GREEN + "Captain we have alrady fired on those coordinates")
         print(Style.RESET_ALL)
-        player_fire(computer_board, boardsize, p_hits, c_hits,
-                    ships_remaining, computer_board_for_player)
+        player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
+                    players_turn, ships_remaining, computer_board_for_player)
     else:
         try:
             player_shots_store.append(user_grid_fire)
@@ -155,11 +155,13 @@ def player_fire(computer_board, boardsize, p_hits, c_hits,
             print(Style.RESET_ALL)
             print("please enter coordinates in the format described with \n"
                   "values within the board")
-            player_fire(computer_board, boardsize, p_hits,
-                        c_hits, ships_remaining,
+            player_fire(player_board, computer_board, boardsize, p_hits,
+                        c_hits, players_turn, ships_remaining,
                         computer_board_for_player)
 
     players_turn = False
+    main_game(player_board, computer_board, boardsize, p_hits, c_hits,
+              players_turn, ships_remaining, computer_board_for_player)
     return players_turn, ships_remaining
 
 
@@ -210,12 +212,12 @@ def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
             print(Style.RESET_ALL)
             display_board(computer_board_for_player)
             fire_instructions(boardsize)
-            players_turn = player_fire(computer_board, boardsize, p_hits,
-                                       c_hits, ships_remaining,
-                                       computer_board_for_player)
+            player_fire(player_board, computer_board, boardsize, p_hits,
+                        c_hits, players_turn, ships_remaining,
+                        computer_board_for_player)
         else:
             computer_fire(player_board, computer_board, boardsize, p_hits,
-                          c_hits, ships_remaining,
+                          c_hits, players_turn, ships_remaining,
                           computer_board_for_player)
     end_game(c_hits, p_hits)
 
@@ -243,8 +245,9 @@ def place_ship(board, boardsize):
 
 def display_board(board):
     """
-    Simple function to be called to show playerboard row by row, making it
-    much easier to see where the computer has fired.
+    Simple function to be called to show player and computer board row by row,
+    this produces a much better view of the board for the player and allows
+    Colorama styling. 
     """
     for row in board:
         x = 0
