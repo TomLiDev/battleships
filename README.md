@@ -110,83 +110,25 @@ Similar to the colouring of the text, this will create a more human experience w
 
 ## Features
 
-### General Features On All pages
+As a python driven project, this game does not really have features in the same way as a website. However there are a number of functions which display information to the player or require input from the player which are particularly relevant to the game play and experience. 
 
-#### Header/Nav Bar
+### Welcome Message and Board Size Selection
 
-Every page has the same navigation bar at the top, comprising a planet Earth icon and the word home in the top left. This is a link which takes the user back to the home page. In the right of the bar the user has the option to jump to the Leaderboard, I may also include a call to action such as - sign up for competitions/stay informed, which will bring the user to a sign up. Both these links will be made up of icons and text as a link to the relevant pages. I did experiment with just using an Icon or just using text but I feel the combination looks the best and provides the best navigation for the user.
+Accompanying the welcome message, the player will be asked to enter one of two options for the size of the board. This input will be used in the functions to create game boards of the relevant size. Validation will be used to ensure a viable input is given and the game will begin from this point.
 
-![Image of the Nav Bar, found at the top of all pages](documentation/nav-bar.png)
+### Player Fire 
 
-#### Footer
+After the player and computer boards have been created the player will be asked to input coordinates to 'fire on'. The required format of this input will be explained and validation will be used to ensure that a viable input is provided by the player so the game can continue. 
 
-Every page has the same footer bar comprising icon links to Facebook, Instagram, Twitter and Linkedin.
+### Displaying of Player Board and Computer Board
 
-I did originally have this footer in a black bar running the length of the bottom of the screen, but this looked a little odd so I tried the icons simply floating as the bottom and I think this looks much nicer and cleaner.
+At the start of the players turn a function will be used to present the layout and position of the players ships. This will need to show the ships on the board in a way which is as close as possible to an actual game board of battleships to ensure a good experience and fun game. 
 
-![Image of the footer, found at the bottom of all pages](documentation/footer.png)
+A similar function will be needed to show where the player has fired and whether or not they have hit the computers ships. Care will need to be taken to ensure that only shots are displayed, and the computer ships themselves are not revealed. Again this will need to match an actual battleships board as closely as possible.
 
-### Homepage
+### Game over
 
-On the homepage the user is presented with the options to Start a new quiz, view instructions in How to play and View the leaderboard. Each of these buttons sit centrally in the middle of the page, held within a semi-transparent menu that sits on top of the space background image. The nav bar is at the top of the page and the social media links sit at the bottom.
-
-![An image of the homepage on different devices](documentation/space-quiz-homepage-devices.png)
-
-### Instructions Page
-
-The instructions page will present the user with a simple, short list of instuctions on how to play the game. As the game is a quiz and the options to select an answer in relation to the question being displayed are fairly obvious and intuitive the instructions will be brief.
-The instructions page will include a button to start a quiz, removing the need to go back to the home screen, making the user experience easier and quicker.
-
-![An image of the instructions page on different devices](documentation/instructions-page-devices.png)
-
-### Username Page
-
-If the user selects to begin a quiz they will be presented with a page which asks them to enter a user name and then a button to start the quiz. This value will be passed through the quiz for use in the leaderboard later is the player scores highly enough.
-
-![An image of the enter username page on different devices](documentation/username-page-devices.png)
-
-### Quiz Start
-
-The Quiz Start page wil be visually similar to the home page. The key difference being the text in the central menu will be a question and the buttons below this will be options to select different answers.
-
-I will create this page so that when the user selects an option Javascript will be listening for the button click. If the user selects the correct answer then the button will be highlighted in green, a correct score will be added to the score counter and the next question will be loaded.
-
-If the user selects an incorrect answer, the answer that they clicked will be highlighted in red, and the correct answer will be highlighted in green. No score will be recored, or an incorrect score will be tallied if I decide to incorporate negative scoring for incorrect answers.
-
-Once the answer has been selected, the relevant on screen styling has occured, and the relevant scoring mechanism has taken place, Javascript will be used to change the content of the questions/answers and display the user with a new question. I will create a reasonably large datastructure to hold multiple questions that can be pulled, at random, into a quiz of 5 - 10 questions, so that the user has a good chance of getting a mixture of different questions each time they do the quiz.
-
-The Fisher-Yates shuffle algorithm (see credits section for source) will be used to shuffle the question bank each time the quiz is loaded to ensure that the order of questions is different each time the player plays.
-
-![An image of the quiz start page on different devices](documentation/quiz-start-devices.png)
-
-At the end of the quiz the users final score will be passed to the results page.
-
-### Result Page
-
-The result page will be shown to the user at the end of the quiz. It will show the users enter player name, their final calculated score from the quiz with some text stating well done!
-There will then a button to take the user to the leaderboard to see if/where their score ranks against othe players.
-
-![An image of the results page shown on different devices](documentation/results-page-devices.png)
-
-### Leaderboard
-
-The leaderboard page will be shown after the user has clicked the leaderboard button after viewing their final result, or if the player chooses to navigate to the leaderboard directly from the home page, or from the nav bar link. This will consist of a table showing the ranking, name and score of other players results.
-
-The leaderboard will update with a new player name and score, in the relevant rank if that score is high enough to beat the lowest score on the leaderboard at the time.
-
-The leaderboard will include a button below the ranking table itself to start another quiz. This removes the need to navigate back to the homepage and keeps the player playing the game to improve their score, greatly increasing user experience and engagement with the game itself.
-
-![An image of the leaderboard shown on different devices](documentation/leaderboard-devices.png)
-
-Time permitting, I would like to incorporate some code so that if the player has scored highly enough to enter the leaderboard, their name/score/ranking row is highlighted so it is obvious.
-
-### 404 Error Page
-
-The 404 error page will be shown if there is an error somewhere in the navigation/direction in using the page.
-
-This will incorporate the nav bar and footer links as all the other pages. Centrally, a simple message will inform the user that this is the 404 error page with a link to take the user back to the home page.
-
-![An image of the 404 error page shown on different devices](documentation/error-page-devices.png)
+Once all the ships on either the player or computer board have been sunk I want to incorporate a function which displays a congratulations/commiserations message and gives the option to start another game immediately from that point, without repeating instructions or welcome messages. 
 
 ## Future Implementations/Plans
 
