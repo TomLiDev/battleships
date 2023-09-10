@@ -72,53 +72,39 @@ Key Features:
 
 #### First Time Visitors
 
-As a first time visitor I want to understand how to play the quiz and have the ability to start the quiz quickly and easily. I want to know which questions I get right and wrong, if wrong, I want to know what the correct answer was. Once completed, I want to know my overall score and how that compares to others.
-
-I want a prompt to come back and play again in the future.
+As a first time visitor I want to understand how to play the game and have the ability to start the game quickly. I'd like a fun experience playing the game and the option to start another game quickly afterwards to keep me engaged. 
 
 #### Return Visitor
 
-As a return visitor I have to be able to easily check my past score against other players. I want to be able to start a new quiz without having to read through the instructions. Ideally I want to have a variety of questions so that when I come back to do the quiz again I am not getting the same questions. The ability to choose a different difficulty would also keep the game interesting.
+As a return visitor I want to be able to play a game quickly without the need to read through instructions. Some different options for the size of the game board would be good to provide variety and keep the game interesting on repeat plays. 
 
 ## Design
 
-### Colour Scheme
+Being a python driven project, there are limited options for introducing fonts, colour and different design aspects.
 
-I knew the colour scheme would be driven largely by the colours of the background images used on the home page. This would mean using black and potentially some dark purple/blue. I will then use a pale blueish offwhite for sections that I wanted to highlight and bring attention to, such as menu containers, to provide contrast against the background and provide contrast for a dark text colour. The colour pallette is however kept very simple and driven largely by the space background, which is deliberate.
+### Colorama
 
-![Image of Color Palette](documentation/spacequiz-colour-pallette.png)
+However I will import and use the Colorama library to customise some of the messages displayed to the player to provide some contrast and variety in the messages. The purpose of this colouring will be to provide some contrast and variety, to visually improve the game and make it more visually appealing, whilst also providing some targeting of the messages so that the player has a better understanding of what is happening and how to interact with the game.
 
-### Typography
+Messages that are targeted at the player will be displayed with green text, giving prompts for actions, input etc. 
 
-I used the font Exo 2 from google fonts for the site. I experimented with other font types to see which gave a futuristic sci fi feel, without making the text too outlandish or difficult to read. I feel that Exo 2 meets this requirement nicely, and when capitalised works well in the nav bar also.
+Messages that are relevant to the 'enemy', the computer actions, will be displayed in red. 
 
-[Image of Garamond, Font Used on Website](documentation/exo2-font.png)
+Some messages, such as the opening welcome may be displayed with a background colour as well as coloured text, to create a message banner effect. The idea being this will look more like a title. 
 
-San's serif is used as the back-up font if FONT cannot be loaded for any reason.
+General messages and instructions will be displayed in the default white text with a black background.
+
+This difference in styling and presentation of the text messages is intended to create the impression that the player is 'being spoken to' by an advisor or second in command with the green messages, whilst the red messages can be clearly identified as 'the enemy'. This effect should make the game feel more human, make for a more engaging game and keep the player wanting to play. 
+
+### Emoji
+
+I will use the emoji library to add smileys, frown faces etc at relevant points in the game to accompany messages. E.g. a big smiley face will come after the initial Welcome to the Game message, a frown or angry face may accompany the message that one of the players ships have been hit. 
+
+Similar to the colouring of the text, this will create a more human experience whilst playing the game, adding a touch of emotion to certain events, improving the overall experience and making the game more engaging. 
 
 ### Imagery
 
-I want to keep the imagery quite simple as I don't want too much on-screen to distract from the quiz questions. The main image used will be the space background image, this provides a nice back drop that also has a bit of variety in the colours.
-
-[The background image](documentation/space-background1.webp)
-
-I may also use images of planets/stars etc in the leaderboard and other pages that are not quiz question pages to provide variety.
-
-Some simple icons will also be used but the pages will be without big images as I want to keep the focus on the quiz and questions.
-
 ### Wireframes
-
-Please use the links below to view the relevant wireframes, both desktop and mobile for each page.
-
-[Homepage Wireframes](documentation/wireframe-index.png)
-
-[Username Wireframe](documentation/wireframe-index.png)
-
-[Quiz Start Wireframe](documentation/wireframe-quiz-start.png)
-
-[Results Wireframe](documentation/wireframe-results.png)
-
-[Leaderboard Wireframe](documentation/wireframe-results.png)
 
 [404 Error page Wireframe](documentation/wireframe-error-page.png)
 
@@ -234,37 +220,31 @@ This site has been built to be as accessible as possible, specifically:
 
 ### Languages Used
 
-HTML, CSS and Javascript are used.
+This project is written in Python. 
 
 ### Libraries and External Sources
 
 - Git - Version control.
 
-- Github - To save and store code for the website itself.
+- Github - To save and store code for the game itself. 
 
-- Github pages - To deploy the live site.
+- Heroku - The platform for deploying the game as an app.
 
-- Code anywhere - The workspace and IDE for producing the site.
+- Code anywhere - The workspace and IDE for producing the game.
 
-- Balsamiq - wireframes
+- Flow Diagrams
 
-- Coolors - Colour Palette
+- Colorama - Library imported for coloured text
 
-- Google fonts - For imported fonts
-
-- Font Awesome - For header and footer icons
-
-- Google Developer Tools - For troubleshooting/bug resolution and testing responsiveness
+- Emoji - Library imported for emojis
 
 - W3C Validators - For checking validity of HTML and CSS.
 
 - JSHint - Used to check the validity and quality of Javascript.
 
-- Am I Responsive? - To create images of website on range of device screens.
-
 ## Deployment
 
-This was website was deployed using Github pages. Instructions to do this are:
+This was website was deployed using Heroku. Instructions to do this are:
 
 1. Go to Github and Log in (or sign up).
 
