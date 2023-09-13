@@ -18,19 +18,17 @@ Please use the link below to view the live, deployed game as an app on the Herok
 
 - [Design](#design)
 
-- [Colour Scheme](#colour-scheme)
+- [Colorama](#colorama)
 
-- [Typography](#typography)
-
-- [Imagery](#imagery)
+- [Emoji](#emoji)
 
 - [Wireframes](#wireframes)
 
 - [Features](#features)
 
-- [General Features on All Pages](#general-features-on-all-pages)
+- [General Features on All Pages](#welcome-message-and-board-size-selection)
 
-- [Homepage](#homepage)
+- [Displaying Boards](displaying-boards)
 
 - [Username Page](#username-page)
 
@@ -102,8 +100,6 @@ I will use the emoji library to add smileys, frown faces etc at relevant points 
 
 Similar to the colouring of the text, this will create a more human experience whilst playing the game, adding a touch of emotion to certain events, improving the overall experience and making the game more engaging. 
 
-### Imagery
-
 ### Wireframes
 
 [404 Error page Wireframe](documentation/wireframe-error-page.png)
@@ -116,15 +112,15 @@ As a python driven project, this game does not really have features in the same 
 
 Accompanying the welcome message, the player will be asked to enter one of two options for the size of the board. This input will be used in the functions to create game boards of the relevant size. Validation will be used to ensure a viable input is given and the game will begin from this point.
 
-### Player Fire 
-
-After the player and computer boards have been created the player will be asked to input coordinates to 'fire on'. The required format of this input will be explained and validation will be used to ensure that a viable input is provided by the player so the game can continue. 
-
-### Displaying of Player Board and Computer Board
+### Displaying Boards
 
 At the start of the players turn a function will be used to present the layout and position of the players ships. This will need to show the ships on the board in a way which is as close as possible to an actual game board of battleships to ensure a good experience and fun game. 
 
 A similar function will be needed to show where the player has fired and whether or not they have hit the computers ships. Care will need to be taken to ensure that only shots are displayed, and the computer ships themselves are not revealed. Again this will need to match an actual battleships board as closely as possible.
+
+### Player Fire 
+
+After the player and computer boards have been created the player will be asked to input coordinates to 'fire on'. The required format of this input will be explained and validation will be used to ensure that a viable input is provided by the player so the game can continue.
 
 ### Game over
 
@@ -182,7 +178,19 @@ This was website was deployed using Heroku. Instructions to do this are:
 
 5. Go to Heroku, and log in (or sign up)
 
-6. Create a
+6. Navigate to the Heroku Dashboard and click "Create new app".
+
+7. Enter a name
+
+8. From the "Add buildpack" option, add the Python buildpack and save
+
+9. Add the node.js buildpack and save
+
+10. Select Github from the deployment method
+
+11. Find the repository name for this project, battleships (TomLiDev), click connect
+
+12. Scroll to the next section and select automatic deploys
 
 ## Local Development
 
@@ -190,7 +198,7 @@ This was website was deployed using Heroku. Instructions to do this are:
 
 1. Log in (or sign up) to Github.
 
-2. Go to the repository for this project, TomLiDev/Space-Quiz-Pilot-Assessment.
+2. Go to the repository for this project, TomLiDev/battleships.
 
 3. Click the Fork button in the top right corner.
 
@@ -198,7 +206,7 @@ This was website was deployed using Heroku. Instructions to do this are:
 
 1. Log in (or sign up) to GitHub.
 
-2. Go to the repository for this project, TomLiDev/Space-Quiz-Pilot-Assessment.
+2. Go to the repository for this project, TomLiDev/battleships.
 
 3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
 
