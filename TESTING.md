@@ -1,33 +1,10 @@
-
-Conversation opened. 1 unread message.
-
-Skip to content
-Using Gmail with screen readers
-6 of 8,119
-testing.md
-
-Tom Litchfield
-Attachments
-10:45 (8 hours ago)
-to t.litchfield00@gmail.com
-
- 
-
 # Battleships - Testing
-
- 
 
 ## Testing
 
- 
-
 Testing was conducted at several stages throughout the development using python3 run.py command to identify any errors or exceptions. Further testing was later done via the Heroku app and using the pep3 authenticator.
 
- 
-
 Early issues identified in meetings with my mentor were:
-
- 
 
 - Maintaining good comments throughout the code, using doc strings to clearly explain the purpose of functions.
 
@@ -35,19 +12,11 @@ Early issues identified in meetings with my mentor were:
 
 - Seperating functions into smaller, atomic functions where possible to avoid larger complex functions.
 
- 
-
 Later issues on first deploying my game, reviewed with my mentor were:
-
- 
 
 - Colorama library not importing properly, causing an error when run from Heroku. Solved with proper requirements.txt.
 
- 
-
 ## CONTENTS
-
- 
 
 - [Automated Testing](#automated-testing)
 
@@ -85,28 +54,15 @@ Later issues on first deploying my game, reviewed with my mentor were:
 
 ## Automated Testing
 
- 
-
 ### Pep3 Automated Testing
-
-
-
 
 #### Findings and Actions
 
- 
-
 ## Manual Testing
-
- 
 
 ### Testing User Stories
 
- 
-
 #### First Time Visitors
-
- 
 
 | Aim                                                 | How does the site achieve this?                                                                                                                                                                                                   |
 
@@ -120,11 +76,7 @@ Later issues on first deploying my game, reviewed with my mentor were:
 
 | Know final score and how I compare to other players | Final score is returned to the player at the end of the quiz with the option to see if that score has been enough to make the leaderboard with a message to confirm whether or not the player has made the leaderboard on viewing |
 
- 
-
 #### Return Visitor
-
- 
 
 | Aim                                                    | How does the site achieve this?                                                                                                                                         |
 
@@ -134,23 +86,11 @@ Later issues on first deploying my game, reviewed with my mentor were:
 
 | Play with a different board size for vareity                                       | A board size of either 6 or 10 can be selected at the beginning of each game, this can be done from the very start of the game, or after the option to replay the game                                                 |
 
- 
-
 ## Full Testing
-
- 
 
 Full testing of the website was performed on a Dell optiplex desktop on 25 inch Toshiba and Soundwave monitors, Dell Latitude 5510 14 inch screen laptop, iPad 8th generation, Samsung Galaxy S10, iPhone 14 pro.
 
- 
-
 Testing was conducted using Google Chrome, MS Edge and Safari.
-
- 
-
-### Homepage
-
- 
 
 | Feature/Function    | Expected Outcome                                          | Method of Test    | Result                           | Pass/Fail |
 
@@ -208,239 +148,11 @@ Testing was conducted using Google Chrome, MS Edge and Safari.
 
 | Computer Victory  | When no more player ships are present, game is ended, message is presented to player declaring they have lost and option to start another game is presented | Played until all player ships sunk | Defeat message printed, game ended and option to play again presented | Pass      |
 
- 
-
-### Username Page
-
- 
-
-| Feature/Function    | Expected Outcome                                                                             | Method of Test    | Result                                                                                          | Pass/Fail |
-
-| :------------------ | :------------------------------------------------------------------------------------------- | :---------------- | :---------------------------------------------------------------------------------------------- | :-------- |
-
-| NAVBAR              |                                                                                              |                   |                                                                                                 |
-
-| Home Link           | Return/refresh home page on click                                                            | Clicked link      | Returned to home                                                                                | Pass      |
-
-| Home Link Hover     | Underline appears under text.                                                                | Hovered over link | Underline appeared                                                                              | Pass      |
-
-| Leaderboard Link    | Return/refresh to Leaderboard page on click                                                  | Clicked link      | Returned to Leaderboard page                                                                    | Pass      |
-
-| Leaderboard Hover   | Underline appears under text.                                                                | Hovered over link | Underline appeared                                                                              | Pass      |
-
-| FOOTER              |                                                                                              |                   |                                                                                                 |
-
-| Facebook Icon Link  | Opens Facebook in separate browser on click                                                  | Clicked icon      | Opened Facebook in separate tab                                                                 | Pass      |
-
-| Instagram Icon Link | Opens Instagram in separate browser on click                                                 | Clicked icon      | Opened Instagram in separate tab                                                                | Pass      |
-
-| Twitter Icon Link   | Opens Twitter in separate browser on click                                                   | Clicked icon      | Opened Twitter in separate tab                                                                  | Pass      |
-
-| Linkedin Icon Link  | Opens Linkedin in separate browser on click                                                  | Clicked icon      | Opened Linkedin in separate tab                                                                 | Pass      |
-
-| Username Page       |                                                                                              |                   |                                                                                                 |
-
-| Enter Name Field    | When clicked placeholder text will clear OR user will get suggestions for previous names     | Clicked in field  | Placeholder text cleared OR given suggestions to select from previous name which populate field | Pass      |
-
-| Start Quiz!         | When clicked user will be redirected to quiz-start page and first question will be presented | Clicked link      | Redirected to quiz-start page and first question loaded                                         | Pass      |
-
- 
-
-### Instructions Page
-
- 
-
-| Feature/Function    | Expected Outcome                                    | Method of Test    | Result                           | Pass/Fail |
-
-| :------------------ | :-------------------------------------------------- | :---------------- | :------------------------------- | :-------- |
-
-| NAVBAR              |                                                     |                   |                                  |
-
-| Home Link           | Return/refresh home page on click                   | Clicked link      | Returned to home                 | Pass      |
-
-| Home Link Hover     | Underline appears under text.                       | Hovered over link | Underline appeared               | Pass      |
-
-| Leaderboard Link    | Return/refresh to Leaderboard page on click         | Clicked link      | Returned to Leaderboard page     | Pass      |
-
-| Leaderboard Hover   | Underline appears under text.                       | Hovered over link | Underline appeared               | Pass      |
-
-| FOOTER              |                                                     |                   |                                  |
-
-| Facebook Icon Link  | Opens Facebook in separate browser on click         | Clicked icon      | Opened Facebook in separate tab  | Pass      |
-
-| Instagram Icon Link | Opens Instagram in separate browser on click        | Clicked icon      | Opened Instagram in separate tab | Pass      |
-
-| Twitter Icon Link   | Opens Twitter in separate browser on click          | Clicked icon      | Opened Twitter in separate tab   | Pass      |
-
-| Linkedin Icon Link  | Opens Linkedin in separate browser on click         | Clicked icon      | Opened Linkedin in separate tab  | Pass      |
-
-| Instructions Page   |                                                     |                   |                                  |
-
-| Begin! Button       | When clicked user will be returned to username page | Clicked button    | Returned to username page        | Pass      |
-
- 
-
-### Quiz Start
-
- 
-
-| Feature/Function       | Expected Outcome                                                                                                                                                                                                  | Method of Test           | Result                                                                                                                            | Pass/Fail |
-
-| :--------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :-------- |
-
-| NAVBAR                 |                                                                                                                                                                                                                   |                          |                                                                                                                                   |
-
-| Home Link              | Return/refresh home page on click                                                                                                                                                                                 | Clicked link             | Returned to home                                                                                                                  | Pass      |
-
-| Home Link Hover        | Underline appears under text.                                                                                                                                                                                     | Hovered over link        | Underline appeared                                                                                                                | Pass      |
-
-| Leaderboard Link       | Return/refresh to Leaderboard page on click                                                                                                                                                                       | Clicked link             | Returned to Leaderboard page                                                                                                      | Pass      |
-
-| Leaderboard Hover      | Underline appears under text.                                                                                                                                                                                     | Hovered over link        | Underline appeared                                                                                                                | Pass      |
-
-| FOOTER                 |                                                                                                                                                                                                                   |                          |                                                                                                                                   |
-
-| Facebook Icon Link     | Opens Facebook in separate browser on click                                                                                                                                                                       | Clicked icon             | Opened Facebook in separate tab                                                                                                   | Pass      |
-
-| Instagram Icon Link    | Opens Instagram in separate browser on click                                                                                                                                                                      | Clicked icon             | Opened Instagram in separate tab                                                                                                  | Pass      |
-
-| Twitter Icon Link      | Opens Twitter in separate browser on click                                                                                                                                                                        | Clicked icon             | Opened Twitter in separate tab                                                                                                    | Pass      |
-
-| Linkedin Icon Link     | Opens Linkedin in separate browser on click                                                                                                                                                                       | Clicked icon             | Opened Linkedin in separate tab                                                                                                   | Pass      |
-
-| Quiz Start             |                                                                                                                                                                                                                   |                          |                                                                                                                                   |
-
-| Click correct Answer   | When clicked user will have their selected button highlighted in green, all buttons will be disabled until next question, a score of 10 will be added to current score                                            | Clicked correct answer   | Correct answer/answer clicked highlighted in green, all buttons disabled until next question, score of 10 added                   | Pass      |
-
-| Click incorrect Answer | When clicked user will have their selected button highlighted in red, correct answer will be highlighted in green, all buttons will be disabled until next question, a score of 10 will be added to current score | Clicked incorrect answer | Clicked answer/incorrect answer highlighted in red, correct answer highlighted in green, all buttons disabled until next question | Pass      |
-
-| Next question load     | After correct/incorrect action, 2 seconds pass and then next question loaded with answer buttons enabled                                                                                                          | Clicked Answer           | 2 seconds pass and next question loaded with answer buttons enabled                                                               | Pass      |
-
-| Max questions reached  | At max questions answered quiz is ended and user redirected to results page                                                                                                                                       | Max questions reached    | Returned to results page                                                                                                          | Pass      |
-
- 
-
-### Result Page
-
- 
-
-| Feature/Function           | Expected Outcome                                                                                                            | Method of Test    | Result                                                                    | Pass/Fail |
-
-| :------------------------- | :-------------------------------------------------------------------------------------------------------------------------- | :---------------- | :------------------------------------------------------------------------ | :-------- |
-
-| NAVBAR                     |                                                                                                                             |                   |                                                                           |
-
-| Home Link                  | Return/refresh home page on click                                                                                           | Clicked link      | Returned to home                                                          | Pass      |
-
-| Home Link Hover            | Underline appears under text.                                                                                               | Hovered over link | Underline appeared                                                        | Pass      |
-
-| Leaderboard Link           | Return/refresh to Leaderboard page on click                                                                                 | Clicked link      | Returned to Leaderboard page                                              | Pass      |
-
-| Leaderboard Hover          | Underline appears under text.                                                                                               | Hovered over link | Underline appeared                                                        | Pass      |
-
-| FOOTER                     |                                                                                                                             |                   |                                                                           |
-
-| Facebook Icon Link         | Opens Facebook in separate browser on click                                                                                 | Clicked icon      | Opened Facebook in separate tab                                           | Pass      |
-
-| Instagram Icon Link        | Opens Instagram in separate browser on click                                                                                | Clicked icon      | Opened Instagram in separate tab                                          | Pass      |
-
-| Twitter Icon Link          | Opens Twitter in separate browser on click                                                                                  | Clicked icon      | Opened Twitter in separate tab                                            | Pass      |
-
-| Linkedin Icon Link         | Opens Linkedin in separate browser on click                                                                                 | Clicked icon      | Opened Linkedin in separate tab                                           | Pass      |
-
-| Results Page               |                                                                                                                             |                   |                                                                           |
-
-| Player name                | When returned to result page, player name inputted on username field to show in space between Well done and You Scored text | Returned to page  | Inputted player name shown in space between Well done and You Scored text | Pass      |
-
-| Player Score               | When returned to result page, player score should be taken and displayed next to Score:                                     | Returned to page  | Correct player score shown next to Score:                                 | Pass      |
-
-| Check the leaderboard link | When clicked, return use to the leaderboard                                                                                 | Clicked link      | Returned to leaderboard                                                   | Pass      |
-
- 
-
-### Leaderboard
-
- 
-
-| Feature/Function                      | Expected Outcome                                                                                                                                                   | Method of Test                          | Result                                                               | Pass/Fail |
-
-| :------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------- | :------------------------------------------------------------------- | :-------- |
-
-| NAVBAR                                |                                                                                                                                                                    |                                         |                                                                      |
-
-| Home Link                             | Return/refresh home page on click                                                                                                                                  | Clicked link                            | Returned to home                                                     | Pass      |
-
-| Home Link Hover                       | Underline appears under text.                                                                                                                                      | Hovered over link                       | Underline appeared                                                   | Pass      |
-
-| Leaderboard Link                      | Return/refresh to Leaderboard page on click                                                                                                                        | Clicked link                            | Returned to Leaderboard page                                         | Pass      |
-
-| Leaderboard Hover                     | Underline appears under text.                                                                                                                                      | Hovered over link                       | Underline appeared                                                   | Pass      |
-
-| FOOTER                                |                                                                                                                                                                    |                                         |                                                                      |
-
-| Facebook Icon Link                    | Opens Facebook in separate browser on click                                                                                                                        | Clicked icon                            | Opened Facebook in separate tab                                      | Pass      |
-
-| Instagram Icon Link                   | Opens Instagram in separate browser on click                                                                                                                       | Clicked icon                            | Opened Instagram in separate tab                                     | Pass      |
-
-| Twitter Icon Link                     | Opens Twitter in separate browser on click                                                                                                                         | Clicked icon                            | Opened Twitter in separate tab                                       | Pass      |
-
-| Linkedin Icon Link                    | Opens Linkedin in separate browser on click                                                                                                                        | Clicked icon                            | Opened Linkedin in separate tab                                      | Pass      |
-
-| Leaderboard                           |                                                                                                                                                                    |                                         |                                                                      |
-
-| Well done! Alert                      | On being returned to leaderboard, if score is high enough to make leaderboard, alert appears on screen, saying Well done! Leaderboard shuffled accordingly (below) | Returned to page with high enough score | Well done! Alert                                                     | Pass      |
-
-| Not this time pilot, try again. Alert | When returned to leaderboard with score lower than lowest score on leaderboard, alert will appear with text Not this time pilot, try again.                        | Returned to page with low score         | Not this time pilot, try again. Alert                                | Pass      |
-
-| Leaderboard reorder                   | If player score is high enough, after clicking okay on alert, leaderboard is shuffled with player score and name inputted into relevant rank                       | Clicked alert after high enough score   | leaderboard reordered with name and score inputted into correct rank | Pass      |
-
- 
-
-### 404 Error Page
-
- 
-
-| Feature/Function    | Expected Outcome                             | Method of Test    | Result                           | Pass/Fail |
-
-| :------------------ | :------------------------------------------- | :---------------- | :------------------------------- | :-------- |
-
-| NAVBAR              |                                              |                   |                                  |
-
-| Home Link           | Return/refresh home page on click            | Clicked link      | Returned to home                 | Pass      |
-
-| Home Link Hover     | Underline appears under text.                | Hovered over link | Underline appeared               | Pass      |
-
-| Leaderboard Link    | Return/refresh to Leaderboard page on click  | Clicked link      | Returned to Leaderboard page     | Pass      |
-
-| Leaderboard Hover   | Underline appears under text.                | Hovered over link | Underline appeared               | Pass      |
-
-| FOOTER              |                                              |                   |                                  |
-
-| Facebook Icon Link  | Opens Facebook in separate browser on click  | Clicked icon      | Opened Facebook in separate tab  | Pass      |
-
-| Instagram Icon Link | Opens Instagram in separate browser on click | Clicked icon      | Opened Instagram in separate tab | Pass      |
-
-| Twitter Icon Link   | Opens Twitter in separate browser on click   | Clicked icon      | Opened Twitter in separate tab   | Pass      |
-
-| Linkedin Icon Link  | Opens Linkedin in separate browser on click  | Clicked icon      | Opened Linkedin in separate tab  | Pass      |
-
-| Instructions Page   |                                              |                   |                                  |
-
-| Back to home        | When clicked user returned to home page      | Clicked button    | Returned to homepage             | Pass      |
-
- 
-
 ## Bugs
-
- 
 
 ### Solved Bugs
 
- 
-
 1. Changing Values on Board copying across all rows - Early in the project I ran into an issue when trying to 'place the ships' on the game board. The function for this was essentially changing some of the zero's on the blank created game board, to different numbers, to represent the places of different ships. To do this I began the function by accessing a particular index on a particular row, a 'grid coordinate', and changing this to a different value. However when doing this I found the value would be copied across all rows for that particular index, essentially creating an entire column of a value, instead of just an individual index in an individual row. After reseaching I found this is a commonly encountered problem across different elements of Python, and is essentially related to Pythons nature of referring to the original object in different functions, value changes etc, rather than treating each interaction with the object as creating a new object. The solution I found to this was to use a list comprehension, rather than a for loop. Using this method to create the list of lists, the board, allowed each index in each row to be accessed and changed individually, without effecting the rest of the board. It also had the added bonus of refactoring the code and making the function much more concise.
-
- 
 
 2. Placing Ships within Board Values - A challenge which I ran into was ensuring that when placed, ships would be placed randomly but within the board values, so that the row-lists were not extended with ships essentially being placed off the edge of the board. I wanted to make the ship placement random as it would remove an area for user input error whilst also keeping the game unique on each play. To solve this challenge I eventually decided on a solution that captured the length of a row, then subtract the ship value from this row length. The placement function then creates a random number between this value, and 1, and uses this value as the row index from where the start of the ship will be placed on the row.
 
@@ -450,19 +162,11 @@ If the board was a size of 6, and a battleship with a value of 4 was being place
 
 This method ensures that the board row length can be used generically for either boards of 6 or 10 size, for every ship length, and the ship will never be placed off the board.
 
- 
-
 3. Game Board View - With standard print statements, the game board was displayed in the command panel as sequential lists of lists. These were entirely accurate but were difficult to follow and greatly detracted from the game play experience. A simple function I developed to solve this was simply to print the board row by row, which gave a much better view of the board, the place of ships, and could also be used to show where the player had already fired/been fired on. These print statements produced a view much closer to an actual battleships board, however because the top line was populated with strings for letters, these included quote marks and so the columns didn't quite line up with the rest of the board.
-
- 
 
 4.  
 
- 
-
 ### Known Issues
-
- 
 
 1. Colorama Background on Welcome Message - Sometimes, the coloured background on the welcome message extends for 2 lines beyond the Welcome to Battleships text. There doesn't seem to be a pattern to how or why this happens and so I haven't been able to resolve it.
 
