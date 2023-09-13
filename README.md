@@ -22,7 +22,7 @@ Please use the link below to view the live, deployed game as an app on the Herok
 
 - [Emoji](#emoji)
 
-- [Wireframes](#wireframes)
+- [Flow Diagrams](#flow-diagrams)
 
 - [Features](#features)
 
@@ -102,11 +102,10 @@ Similar to the colouring of the text, this will create a more human experience w
 
 ### Flow Diagrams
 
-The below is a link to the original flow chart designed for this project
+The below is a link to the original flow chart designed for this project. It the top hyperlink doesn't work please use the link immediately below:
 
 [First Flow Diagram](https://lucid.app/lucidchart/5d689449-5866-4bfb-8a0e-fb4715e93c02/edit?viewport_loc=8%2C395%2C1365%2C641%2C0_0&invitationId=inv_986bc45a-fb6d-4b80-b4b2-52cddf59675b)
-
-
+[First Flow Diagram](documentation/first-flowchart.png)
 
 ## Features
 
