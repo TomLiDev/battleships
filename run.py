@@ -25,7 +25,6 @@ def end_game(c_hits, p_hits):
     """
     if p_hits > c_hits:
         print(Fore.GREEN + "Congratulations Captain, you won!")
-        print(Style.RESET_ALL)
         print(emoji.emojize(":grinning_face_with_big_eyes:"))
         replay = input("Would you like to play again? (y/n): \n")
         if replay == "n":
@@ -34,7 +33,6 @@ def end_game(c_hits, p_hits):
             game_select()
     else:
         print(Fore.RED + "Captain we've been sunk, you lost")
-        print(Style.RESET_ALL)
         replay = input("Would you like to play again? (y/n): \n")
         if replay == "n":
             sys.exit()
@@ -56,7 +54,6 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     print("computer grid fire", computer_grid_fire)
 
     if computer_grid_fire in computer_shots_store:
-        print("computer repeat fire")
         computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                       players_turn, ships_remaining, computer_board_for_player)
     else:
@@ -68,7 +65,8 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             print(Fore.RED + "Captain we've been hit!")
             ship_value = player_board[computer_row_fire][computer_column_fire]
             player_board[computer_row_fire][computer_column_fire] = "H"
-            check_ship_sunk(ship_value, computer_board, boardsize, True)
+            print("Ship value", ship_value)
+            check_ship_sunk(ship_value, computer_board, boardsize, False)
             c_hits += 1
             print("Enemy hits", c_hits)
             if c_hits == 10:
@@ -259,7 +257,6 @@ def create_board(boardsize):
     based on user selection. List comprehension code is adapted from external
     source, details in readme.
     """
-    print("Game board creation")
     blank_board = []
     blank_board = [[0] * boardsize for i in range(boardsize)]
     for i in range(len(blank_board)):
@@ -271,8 +268,6 @@ def create_board(boardsize):
     computer_board_for_player = copy.deepcopy(blank_board)
     player_board = place_ship(player_board, boardsize)
     computer_board = place_ship(computer_board, boardsize)
-    print("Player board")
-    display_board(player_board)
     print("Computer board", computer_board)
     p_hits = 0
     c_hits = 0
@@ -304,6 +299,6 @@ def game_select():
         game_select()
 
 
-print(Back.CYAN, Fore.WHITE + "Welcome to Battleships!",
+print(Fore.BLACK, Back.CYAN + Style.BRIGHT + "Welcome to Battleships!",
       emoji.emojize(":grinning_face_with_big_eyes:"))
 game_select()
