@@ -1,8 +1,9 @@
 import random
 import copy
 import sys
-from colorama import Fore, Back, Style
+from colorama import Fore, Back, Style, init
 import emoji
+init(autoreset=True)
 
 LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
 SHIPS = [
@@ -77,8 +78,9 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             else:
                 ships_remaining = True
         else:
-            print(Fore.RED + "The enemy sunk one of our ships!")
+            print(Fore.RED + "The enemy missed")
             print(Style.RESET_ALL)
+            player_board[computer_row_fire][computer_column_fire] = "X"
             ships_remaining = True
         players_turn = True
 
@@ -97,13 +99,11 @@ def fire_instructions(boardsize):
     print(Style.RESET_ALL)
     if boardsize == 6:
         print("Please enter a row and column reference separeted by a comma\n"
-              "e.g. B,3\n"
-              "the row reference must be A - F\n"
-              "and the column reference be 1 - 6 \n")
+              "e.g. B,3. The row reference must be A - F\n"
+              "The column reference be 1 - 6 \n")
     elif boardsize == 10:
         print("Please enter a row and column reference separeted by a comma\n"
-              "e.g. B,3\n"
-              "the row reference must be A - J\n"
+              "e.g. B,3. The row reference must be A - J\n"
               "and the column reference be 1 - 10\n")
 
 
@@ -316,6 +316,7 @@ def game_select():
         game_select()
 
 
+print("")
 print(Back.CYAN, Fore.WHITE + "Welcome to Battleships!",
       emoji.emojize(":grinning_face_with_big_eyes:"))
 print(Style.RESET_ALL)
