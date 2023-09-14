@@ -8,7 +8,7 @@ This project was intended to provide a fun game based on the classic battleships
 
 Please use the link below to view the live, deployed game as an app on the Heroku platform:
 
-[Battleships! Live game](https://tomlidev.github.io/Space-Quiz-Pilot-Assessment/)
+[Battleships! Live game](https://toms-battleships-f6a8a663bf2b.herokuapp.com/)
 
 ## CONTENTS
 
@@ -60,11 +60,7 @@ Please use the link below to view the live, deployed game as an app on the Herok
 
 Toms battleships is a python-driven game based on the classic battleships game.
 
-Key Features:
-
-- The main battleships game. 
-
-- Instructions for how to play the game. 
+Instructions will be provided for optional view alongside the main game. 
 
 ### User Stories
 

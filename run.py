@@ -66,7 +66,6 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             print(Fore.RED + "Captain we've been hit!")
             print(Style.RESET_ALL)
             ship_value = player_board[computer_row_fire][computer_column_fire]
-            print("ship value", ship_value)
             player_board[computer_row_fire][computer_column_fire] = "H"
             check_ship_sunk(ship_value, computer_board, boardsize, True)
             c_hits += 1
@@ -78,7 +77,6 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
         else:
             print("The enemy missed")
             ships_remaining = True
-        print("player board from computer fire", player_board)
         players_turn = True
 
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
@@ -95,11 +93,13 @@ def fire_instructions(boardsize):
     print(Fore.GREEN + "Where shall we fire captain?")
     print(Style.RESET_ALL)
     if boardsize == 6:
-        print("Please enter a row and column reference \n"
+        print("Please enter a row and column reference separeted by a comma\n"
+              "e.g. B,3\n"
               "the row reference must be A - F\n"
               "and the column reference be 1 - 6 \n")
     elif boardsize == 10:
-        print("Please enter a row and column reference \n"
+        print("Please enter a row and column reference separeted by a comma\n"
+              "e.g. B,3\n"
               "the row reference must be A - J\n"
               "and the column reference be 1 - 10\n")
 
@@ -110,7 +110,7 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     Function which takes input from player to
     fire on a certain grid reference on the computer board
     """
-    user_grid_fire = input("Enter row,column reference e.g B,3: \n")
+    user_grid_fire = input("Enter fire reference e.g B,3: \n")
     print("Fire reference", user_grid_fire)
     if user_grid_fire in player_shots_store:
         print(Fore.GREEN + "Captain we have alrady fired on those coordinates")
@@ -181,7 +181,6 @@ def check_ship_sunk(ship_value, board, boardsize, is_player):
         for item in row_ship_check:
             x += 1
             if item == ship_value:
-                print("Ship remaining")
                 ship_sunk = False
                 break
             elif x == y:
