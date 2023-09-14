@@ -45,7 +45,9 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                   players_turn, ships_remaining, computer_board_for_player):
     """
     Function for controlling computer return fire on players board
-    Creates random grid references for fire selection
+    Creates random grid references for fire selection. This is then stored
+    in computer shots store, which is used for validation for future shots
+    to make sure the computer can't fire on the same coordinates.
     """
     print(Fore.RED + "Enemy fire incoming!")
     print(Style.RESET_ALL)
@@ -75,7 +77,8 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             else:
                 ships_remaining = True
         else:
-            print("The enemy missed")
+            print(Fore.RED + "The enemy sunk one of our ships!")
+            print(Style.RESET_ALL)
             ships_remaining = True
         players_turn = True
 
@@ -145,7 +148,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                         else:
                             ships_remaining = True
                     else:
-                        print("You missed")
+                        print(Fore.GREEN + "We missed Captain")
+                        print(Style.RESET_ALL)
                         row[column_ref] = "X"
                         computer_board_for_player[row_ref][column_ref] = "X"
                         ships_remaining = True
@@ -246,7 +250,7 @@ def display_board(board):
     """
     Simple function to be called to show player and computer board row by row,
     this produces a much better view of the board for the player and allows
-    Colorama styling. 
+    Colorama styling.
     """
     for row in board:
         x = 0
@@ -263,7 +267,8 @@ def create_board(boardsize):
     Function which creates the game board based on user selection. Game board
     is a list of lists populated with zero's initially to represent empty
     open sea. Game board either 6x6 or 10x10
-    based on user selection.
+    based on user selection. List comprehension code is adapted from external
+    source, details in readme.
     """
     print("Game board creation")
     blank_board = []
