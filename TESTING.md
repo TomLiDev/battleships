@@ -104,6 +104,6 @@ This method ensures that the board row length can be used generically for either
 
 ### Known Issues
 
-1. Colorama Background on Welcome Message - Sometimes, the coloured background on the welcome message extends for 2 lines beyond the Welcome to Battleships text. There doesn't seem to be a pattern to how or why this happens and so I haven't been able to resolve it. 
-battleships testing.md
-Displaying battleships testing.md.
+1. Colorama Background on Welcome Message - Sometimes, the coloured background on the welcome message extends for 2 lines beyond the Welcome to Battleships text. There doesn't seem to be a pattern to how or why this happens and so I haven't been able to resolve it.
+
+2. Column 10 - On a boardsize of 10 the, the 10 itself at the top of the board, being one character greater than all the other items on the board stands slightly proud. This is a minor aesthetic issue and it does not seem there is a simple way to centre characters without spoiling the layout of the rest of the board.

@@ -50,8 +50,6 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     in computer shots store, which is used for validation for future shots
     to make sure the computer can't fire on the same coordinates.
     """
-    print(Fore.RED + "Enemy fire incoming!")
-    print(Style.RESET_ALL)
     computer_row_fire = random.randrange(1, boardsize)
     computer_column_fire = random.randrange(1, boardsize)
     computer_grid_fire = computer_row_fire, computer_column_fire
@@ -63,11 +61,11 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                       players_turn, ships_remaining, computer_board_for_player)
     else:
         computer_shots_store.append(computer_grid_fire)
+        print(Fore.RED + "Enemy fire incoming!")
         print("computer has fired on", computer_shots_store)
 
         if player_board[computer_row_fire][computer_column_fire] != 0:
             print(Fore.RED + "Captain we've been hit!")
-            print(Style.RESET_ALL)
             ship_value = player_board[computer_row_fire][computer_column_fire]
             player_board[computer_row_fire][computer_column_fire] = "H"
             check_ship_sunk(ship_value, computer_board, boardsize, True)
@@ -79,7 +77,6 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                 ships_remaining = True
         else:
             print(Fore.RED + "The enemy missed")
-            print(Style.RESET_ALL)
             player_board[computer_row_fire][computer_column_fire] = "X"
             ships_remaining = True
         players_turn = True
@@ -117,7 +114,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     print("Fire reference", user_grid_fire)
     if user_grid_fire in player_shots_store:
         print(Fore.GREEN + "Captain we have alrady fired on those coordinates")
-        print(Style.RESET_ALL)
         player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                     players_turn, ships_remaining, computer_board_for_player)
     else:
@@ -133,7 +129,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                     if row[column_ref] != 0:
                         print(Fore.GREEN + "Hit! Good shot Captain",
                               emoji.emojize(":grinning_face_with_big_eyes:"))
-                        print(Style.RESET_ALL)
                         ship_value = row[column_ref]
                         print("ship value", ship_value)
                         row[column_ref] = "H"
@@ -149,14 +144,12 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                             ships_remaining = True
                     else:
                         print(Fore.GREEN + "We missed Captain")
-                        print(Style.RESET_ALL)
                         row[column_ref] = "X"
                         computer_board_for_player[row_ref][column_ref] = "X"
                         ships_remaining = True
             print("Player has fired on", player_shots_store)
         except IndexError:
             print(Fore.GREEN + "Invalid fire coordinates Captain")
-            print(Style.RESET_ALL)
             print("please enter coordinates in the format described with \n"
                   "values within the board")
             player_fire(player_board, computer_board, boardsize, p_hits,
@@ -204,15 +197,11 @@ def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
     Function which controls the player fire, computer fire, and ends the game
     when no ships are left on one of the boards
     """
-    print(Fore.RED + "Enemy ships Captain. .")
-    print(Style.RESET_ALL)
     while ships_remaining is not False:
         if players_turn is True:
             print(Fore.GREEN + "Our ship positions Captain")
-            print(Style.RESET_ALL)
             display_board(player_board)
             print(Fore.GREEN + "This is where we have fired Captain")
-            print(Style.RESET_ALL)
             display_board(computer_board_for_player)
             fire_instructions(boardsize)
             player_fire(player_board, computer_board, boardsize, p_hits,
@@ -282,7 +271,6 @@ def create_board(boardsize):
     computer_board_for_player = copy.deepcopy(blank_board)
     player_board = place_ship(player_board, boardsize)
     computer_board = place_ship(computer_board, boardsize)
-    print("Blank computer board", computer_board_for_player)
     print("Player board")
     display_board(player_board)
     print("Computer board", computer_board)
@@ -316,8 +304,6 @@ def game_select():
         game_select()
 
 
-print("")
 print(Back.CYAN, Fore.WHITE + "Welcome to Battleships!",
       emoji.emojize(":grinning_face_with_big_eyes:"))
-print(Style.RESET_ALL)
 game_select()
