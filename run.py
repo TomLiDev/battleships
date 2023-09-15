@@ -349,7 +349,7 @@ def game_select():
     initial choice from user on board size
     """
     instruct_choice = input("View game instructions? (y/n): \n")
-    if instruct_choice is "y":
+    if instruct_choice == "y":
         instructions()
     else:
         print("Please select a game board size")
