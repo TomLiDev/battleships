@@ -18,6 +18,7 @@ Later issues on first deploying my game, reviewed with my mentor were:
 
 - [Automated Testing](#automated-testing)
 - [Flake8 Testing](#flake8-testing)
+- [Pylint](#pylint)
 - [First Time Visitors](#first-time-visitors)
 - [Return Visitors](#return-visitor)
 - [Full Testing](#full-testing)
