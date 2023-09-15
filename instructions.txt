@@ -1,0 +1,23 @@
+ Battleships! Is a python driven game based on the classic  
+ battleships boardgame.  
+ The aim of the game is to sink all the enemy ships before yours  
+ are sunk. After your choice of game board size, the game will  
+ randomly place your ships on your board and these positions are  
+ displayed to you.  
+ 4 = Battleship  
+ 3 = Cruiser  
+ 2 = Destroyer  
+ 1 = Submarine  
+ You will then have the option to choose where you will fire on  
+ the enemies board. This must be entered with a captial letter to  
+ select the row, and a number to select the column, as you would  
+ with map coordinates. These two characters must be separated by  
+ a comma. Eg. A,4.  
+ The game will tell you if you have hit or missed the computers  
+ ships, and your shots will be displayed on a separate board for  
+ you to view. An X represents a missed hit, a H represents a hit  
+ After each of your shots, the computer will return fire, if they  
+ hit/miss you this will be displayed with X/H, with messages from  
+ the game to confirm this. Keep firing until you have sunk all  
+ the computers ships or they have sunk yours.  
+ Good luck Captain! 

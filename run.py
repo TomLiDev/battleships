@@ -313,6 +313,10 @@ def create_board(boardsize):
 
 
 def instructions():
+    """
+    Simple optional function which displays instruction text to player if
+    they choose it.
+    """
     print("Battleships! Is a python driven game based on the classic\n"
           "battleships boardgame.\n"
           "The aim of the game is to sink all the enemy ships before yours\n"
