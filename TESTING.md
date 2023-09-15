@@ -18,7 +18,7 @@ Later issues on first deploying my game, reviewed with my mentor were:
 
 - [Automated Testing](#automated-testing)
 - [W3C Validator](#w3c-validator)
-- [Manual Testing](#manual-testing)
+- [Flake8 Testing](#flake8-testing)
 - [First Time Visitors](#first-time-visitors)
 - [Return Visitors](#return-visitor)
 - [Full Testing](#full-testing)
@@ -28,9 +28,13 @@ Later issues on first deploying my game, reviewed with my mentor were:
 
 ## Automated Testing
 
-### Pep3 Automated Testing
+### Pep8 Automated Testing
 
-#### Findings and Actions
+#### Flake8 Testing
+
+To ensure compliance with pep8 standard throughout my code, I attempted to install the flake8 validator after online research. However it appears this may already be present in the template used for this project. There are no problems with this built in validator. 
+
+![An image of no issues and a message seemingly suggesting flake8 is already installed](documentation/flake8.jpeg)
 
 ## Manual Testing
 
