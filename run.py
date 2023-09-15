@@ -53,7 +53,6 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     computer_row_fire = random.randrange(1, boardsize)
     computer_column_fire = random.randrange(1, boardsize)
     computer_grid_fire = computer_row_fire, computer_column_fire
-    print("computer grid fire", computer_grid_fire)
 
     if computer_grid_fire in computer_shots_store:
         computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
@@ -61,13 +60,10 @@ def computer_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     else:
         computer_shots_store.append(computer_grid_fire)
         print(Fore.RED + "Enemy fire incoming!")
-        print("computer has fired on", computer_shots_store)
-
         if player_board[computer_row_fire][computer_column_fire] != 0:
             print(Fore.RED + "Captain we've been hit!")
             ship_value = player_board[computer_row_fire][computer_column_fire]
             player_board[computer_row_fire][computer_column_fire] = "H"
-            print("Ship value", ship_value)
             check_ship_sunk(ship_value, computer_board, boardsize, False)
             c_hits += 1
             print("Enemy hits", c_hits)
@@ -161,8 +157,6 @@ def player_fire_placement(user_grid_fire, computer_board_for_player,
     """
     split_fire_reference = user_grid_fire.split(",")
     column_ref = int(split_fire_reference[1])
-    print("fire ref test", user_grid_fire)
-    print("fire ref test 2", split_fire_reference)
     for row in computer_board:
         if row[0] == split_fire_reference[0]:
             row_ref = computer_board.index(row)
@@ -170,7 +164,6 @@ def player_fire_placement(user_grid_fire, computer_board_for_player,
                 print(Fore.GREEN + "Hit! Good shot Captain",
                       emoji.emojize(":grinning_face_with_big_eyes:"))
                 ship_value = row[column_ref]
-                print("ship value", ship_value)
                 row[column_ref] = "H"
                 check_ship_sunk(ship_value, computer_board, boardsize,
                                 True)
@@ -200,7 +193,6 @@ def check_ship_sunk(ship_value, board, boardsize, is_player):
     Takes the hit ship value and scans the remaining board to see if that
     value is still present or not.
     """
-    print("Checking for sunk ship")
     y = boardsize*boardsize
     x = 0
     board_ship_check = board[1:]
