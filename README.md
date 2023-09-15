@@ -26,19 +26,9 @@ Please use the link below to view the live, deployed game as an app on the Herok
 
 - [Features](#features)
 
-- [General Features on All Pages](#welcome-message-and-board-size-selection)
+- [Welcome Message](welcome-message)
 
 - [Displaying Boards](displaying-boards)
-
-- [Username Page](#username-page)
-
-- [Quiz Main page](#quiz-main-page)
-
-- [Results Page](#results-page)
-
-- [Leaderboard](#leaderboard)
-
-- [404 Error Page](#404-error-page)
 
 - [Future Implementations/Plans](#future-implementationsplans)
 
@@ -107,7 +97,7 @@ The below is a link to the flow chart designed for this project. It the top hype
 
 As a python driven project, this game does not really have features in the same way as a website. However there are a number of functions which display information to the player or require input from the player which are particularly relevant to the game play and experience. 
 
-### Welcome Message and Board Size Selection
+### Welcome Message
 
 Accompanying the welcome message, the player will be asked to enter one of two options for the size of the board. This input will be used in the functions to create game boards of the relevant size. Validation will be used to ensure a viable input is given and the game will begin from this point.
 
