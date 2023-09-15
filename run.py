@@ -305,7 +305,6 @@ def create_board(boardsize):
     computer_board_for_player = copy.deepcopy(blank_board)
     player_board = place_ship(player_board, boardsize)
     computer_board = place_ship(computer_board, boardsize)
-    print("Computer board", computer_board)
     p_hits = 0
     c_hits = 0
     players_turn = True
@@ -355,8 +354,6 @@ def game_select():
     if instruct_choice == "y":
         instructions()
     else:
-        for item in SHIPS:
-            print(item["value"])
         print("Please select a game board size")
         print("6 = 6x6 game board")
         print("10 = 10x10 game board")

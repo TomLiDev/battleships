@@ -237,6 +237,11 @@ https://nedbatchelder.com/blog/201308/names_and_values_making_a_game_board.html
 
 https://www.geeksforgeeks.org/python-get-first-element-of-each-sublist/
 
+#### Emoji Code
+
+https://www.geeksforgeeks.org/python-program-to-print-emojis/
+
+
 ### Content
 
 The majority of the content was created by the author.
