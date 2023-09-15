@@ -157,15 +157,13 @@ This project is written in Python.
 
 - Code anywhere - The workspace and IDE for producing the game.
 
-- Flow Diagrams
+- Flow Diagrams - LucidChart
 
 - Colorama - Library imported for coloured text
 
 - Emoji - Library imported for emojis
 
-- W3C Validators - For checking validity of HTML and CSS.
-
-- JSHint - Used to check the validity and quality of Javascript.
+- Flake8 - Python pep8 validator
 
 ## Deployment
 

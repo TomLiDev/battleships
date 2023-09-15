@@ -110,7 +110,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     source. Details in readme.
     """
     user_grid_fire = input("Enter fire reference e.g B,3: \n")
-    print("Fire reference", user_grid_fire)
     if user_grid_fire in player_shots_store:
         print(Fore.GREEN + "Captain we have alrady fired on those coordinates")
         player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
@@ -168,8 +167,6 @@ def player_fire_placement(user_grid_fire, computer_board_for_player,
                 check_ship_sunk(ship_value, computer_board, boardsize,
                                 True)
                 p_hits += 1
-                print("Player hits", p_hits)
-                print("Computer board from pfire", computer_board)
                 computer_board_for_player[row_ref][column_ref] = "H"
                 if p_hits == 10:
                     ships_remaining = False
@@ -180,7 +177,6 @@ def player_fire_placement(user_grid_fire, computer_board_for_player,
                 row[column_ref] = "X"
                 computer_board_for_player[row_ref][column_ref] = "X"
                 ships_remaining = True
-    print("Player has fired on", player_shots_store)
     players_turn = False
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
               players_turn, ships_remaining, computer_board_for_player)
@@ -212,7 +208,7 @@ def check_ship_sunk(ship_value, board, boardsize, is_player):
                     print(Fore.GREEN + f"We sunk an enemy {ship_name}!")
                     print(Style.RESET_ALL)
                 else:
-                    print(Fore.RED + f"The enemy sunk our{ship_name}!")
+                    print(Fore.RED + f"The enemy sunk our {ship_name}!")
                     print(Style.RESET_ALL)
         if ship_sunk is False:
             break
@@ -226,11 +222,10 @@ def main_game(player_board, computer_board, boardsize, p_hits, c_hits,
     """
     while ships_remaining is not False:
         if players_turn is True:
-            print(Fore.GREEN + "Our ship positions Captain")
+            print(Fore.GREEN + "Our ship positions")
             display_board(player_board)
             print(Fore.GREEN + "This is where we have fired Captain")
             display_board(computer_board_for_player)
-            fire_instructions(boardsize)
             player_fire(player_board, computer_board, boardsize, p_hits,
                         c_hits, players_turn, ships_remaining,
                         computer_board_for_player)
@@ -301,6 +296,7 @@ def create_board(boardsize):
     c_hits = 0
     players_turn = True
     ships_remaining = True
+    fire_instructions(boardsize)
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
               players_turn, ships_remaining, computer_board_for_player)
     return player_board, computer_board, boardsize
