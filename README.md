@@ -30,6 +30,10 @@ Please use the link below to view the live, deployed game as an app on the Herok
 
 - [Displaying Boards](displaying-boards)
 
+- [Player Fire](player-fire)
+
+- [Game Over](game-over)
+
 - [Future Implementations/Plans](#future-implementationsplans)
 
 - [Accessibility](#accessibility)
