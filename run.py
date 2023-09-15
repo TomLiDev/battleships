@@ -148,8 +148,7 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     player_fire_placement(user_grid_fire, computer_board_for_player,
                           computer_board, boardsize, player_board, p_hits,
                           c_hits)
-    player_fire_valid = True
-    return players_turn, ships_remaining, player_fire_valid
+    return players_turn, ships_remaining
 
 
 def player_fire_placement(user_grid_fire, computer_board_for_player,
