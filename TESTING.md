@@ -104,7 +104,7 @@ This method ensures that the board row length can be used generically for either
 
 3. Game Board View - With standard print statements, the game board was displayed in the command panel as sequential lists of lists. These were entirely accurate but were difficult to follow and greatly detracted from the game play experience. A simple function I developed to solve this was simply to print the board row by row, which gave a much better view of the board, the place of ships, and could also be used to show where the player had already fired/been fired on. These print statements produced a view much closer to an actual battleships board, however because the top line was populated with strings for letters, these included quote marks and so the columns didn't quite line up with the rest of the board.
 
-4.  
+4. Unique Player and Computer Boards - When refactoring the functions, I wanted to simplify the functions for creating the player and computer board. I realised that it was only the ship placement that needed to be unique between the player and computer board, so I made a generic function to feed a blank board into a ship placement board. However I ran into an issue where both boards were being produced, with both groups of ships, which was resulting in a mess of overlapping ships/values etc. After researching I discovered the deep copy function in python which allowed for 'truly unique' instance of an object to be created and this allowed 1 function 2 create 2 distinct 'blank boards' which could be given to the place ship function. 
 
 ### Known Issues
 
