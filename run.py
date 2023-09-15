@@ -16,6 +16,8 @@ player_shots_store = []
 computer_shots_store = []
 ships_remaining = bool
 players_turn = bool
+c_hits = int
+p_hits = int
 
 
 def end_game(c_hits, p_hits):
@@ -105,8 +107,9 @@ def fire_instructions(boardsize):
 def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                 players_turn, ships_remaining, computer_board_for_player):
     """
-    Function which takes input from player to
-    fire on a certain grid reference on the computer board
+    Function which takes input from player to fire on the computer board,
+    carried out multiple validation checks to ensure fire will be accepted
+    or asks the player to retry entering coordinates accordingly.
     """
     user_grid_fire = input("Enter fire reference e.g B,3: \n")
     print("Fire reference", user_grid_fire)
@@ -119,16 +122,16 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             player_shots_store.append(user_grid_fire)
             split_fire_reference = user_grid_fire.split(",")
             column_ref = int(split_fire_reference[1])
-            row_ref = (split_fire_reference[0])
+            player_row_ref = (split_fire_reference[0])
             row_references = [item[0] for item in computer_board]
             column_references = computer_board[0]
             ships_remaining = bool
             print("Row references", row_references)
-            print("Row Reference", row_ref)
+            print("Row Reference", player_row_ref)
             print("Column references", column_references)
             print("Column ref", column_ref)
 
-            if row_ref not in row_references:
+            if player_row_ref not in row_references:
                 print("Invalid row")
                 player_fire(player_board, computer_board, boardsize, p_hits,
                             c_hits, players_turn, ships_remaining,
@@ -138,32 +141,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
                 player_fire(player_board, computer_board, boardsize, p_hits,
                             c_hits, players_turn, ships_remaining,
                             computer_board_for_player)
-
-            for row in computer_board:
-                if row[0] == split_fire_reference[0]:
-                    row_ref = computer_board.index(row)
-                    if row[column_ref] != 0:
-                        print(Fore.GREEN + "Hit! Good shot Captain",
-                              emoji.emojize(":grinning_face_with_big_eyes:"))
-                        ship_value = row[column_ref]
-                        print("ship value", ship_value)
-                        row[column_ref] = "H"
-                        check_ship_sunk(ship_value, computer_board, boardsize,
-                                        True)
-                        p_hits += 1
-                        print("Player hits", p_hits)
-                        print("Computer board from pfire", computer_board)
-                        computer_board_for_player[row_ref][column_ref] = "H"
-                        if p_hits == 10:
-                            ships_remaining = False
-                        else:
-                            ships_remaining = True
-                    else:
-                        print(Fore.GREEN + "We missed Captain")
-                        row[column_ref] = "X"
-                        computer_board_for_player[row_ref][column_ref] = "X"
-                        ships_remaining = True
-            print("Player has fired on", player_shots_store)
         except IndexError:
             print(Fore.GREEN + "Invalid fire coordinates Captain")
             print("please enter coordinates in the format described with \n"
@@ -171,11 +148,53 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             player_fire(player_board, computer_board, boardsize, p_hits,
                         c_hits, players_turn, ships_remaining,
                         computer_board_for_player)
+    player_fire_placement(user_grid_fire, computer_board_for_player,
+                          computer_board, boardsize, player_board, p_hits,
+                          c_hits)
+    return players_turn, ships_remaining
 
+
+def player_fire_placement(user_grid_fire, computer_board_for_player,
+                          computer_board, boardsize, player_board, p_hits,
+                          c_hits):
+    """
+    Function which takes validated player fire coordinates and checks if they
+    have hit or missed, prints relevant messages to communicate to player
+    and returns the game board accordinlgy. 
+    """
+    split_fire_reference = user_grid_fire.split(",")
+    column_ref = int(split_fire_reference[1])
+    print("fire ref test", user_grid_fire)
+    print("fire ref test 2", split_fire_reference)
+    for row in computer_board:
+        if row[0] == split_fire_reference[0]:
+            row_ref = computer_board.index(row)
+            if row[column_ref] != 0:
+                print(Fore.GREEN + "Hit! Good shot Captain",
+                      emoji.emojize(":grinning_face_with_big_eyes:"))
+                ship_value = row[column_ref]
+                print("ship value", ship_value)
+                row[column_ref] = "H"
+                check_ship_sunk(ship_value, computer_board, boardsize,
+                                True)
+                p_hits += 1
+                print("Player hits", p_hits)
+                print("Computer board from pfire", computer_board)
+                computer_board_for_player[row_ref][column_ref] = "H"
+                if p_hits == 10:
+                    ships_remaining = False
+                else:
+                    ships_remaining = True
+            else:
+                print(Fore.GREEN + "We missed Captain")
+                row[column_ref] = "X"
+                computer_board_for_player[row_ref][column_ref] = "X"
+                ships_remaining = True
+    print("Player has fired on", player_shots_store)
     players_turn = False
     main_game(player_board, computer_board, boardsize, p_hits, c_hits,
               players_turn, ships_remaining, computer_board_for_player)
-    return players_turn, ships_remaining
+    return computer_board, computer_board_for_player
 
 
 def check_ship_sunk(ship_value, board, boardsize, is_player):
