@@ -35,6 +35,12 @@ To ensure compliance with pep8 standard throughout my code, I attempted to insta
 
 ![An image of no issues and a message seemingly suggesting flake8 is already installed](documentation/flake8.jpeg)
 
+#### Pylint
+
+To be thorough I also tried to install pylint for a second pep8 test and recieved a similar message to the above. No issues registered in IDE. 
+
+![pylint image](documentation/pylint.png)
+
 ## Manual Testing
 
 ### Testing User Stories
