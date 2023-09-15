@@ -4,7 +4,7 @@
 
 This project was intended to provide a fun game based on the classic battleships game. 
 
-![An image of the finished website on different devices](documentation/space-quiz-homepage-devices.png)
+![An image of the finished website on different devices](documentation/game-start.jpg)
 
 Please use the link below to view the live, deployed game as an app on the Heroku platform:
 

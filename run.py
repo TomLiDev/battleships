@@ -312,25 +312,56 @@ def create_board(boardsize):
     return player_board, computer_board, boardsize
 
 
+def instructions():
+    print("Battleships! Is a python driven game based on the classic\n"
+          "battleships boardgame.\n"
+          "The aim of the game is to sink all the enemy ships before yours\n"
+          "are sunk. After your choice of game board size, the game will\n"
+          "randomly place your ships on your board and these positions are\n"
+          "displayed to you.\n"
+          "4 = Battleship\n"
+          "3 = Cruiser\n"
+          "2 = Destroyer\n"
+          "1 = Submarine\n"
+          "You will then have the option to choose where you will fire on\n"
+          "the enemies board. This must be entered with a captial letter to\n"
+          "select the row, and a number to select the column, as you would\n"
+          "with map coordinates. These two characters must be separated by\n"
+          "a comma. Eg. A,4.\n"
+          "The game will tell you if you have hit or missed the computers\n"
+          "ships, and your shots will be displayed on a separate board for\n"
+          "you to view. An X represents a missed hit, a H represents a hit\n"
+          "After each of your shots, the computer will return fire, if they\n"
+          "hit/miss you this will be displayed with X/H, with messages from\n"
+          "the game to confirm this. Keep firing until you have sunk all\n"
+          "the computers ships or they have sunk yours.\n"
+          "Good luck Captain!")
+    game_select()
+
+
 def game_select():
     """
     Function which displays welcome message and gets
     initial choice from user on board size
     """
-    print("Please select a game board size")
-    print("6 = 6x6 game board")
-    print("10 = 10x10 game board")
-    userinput = input("Enter 6 or 10: \n")
-
-    boardsize = int(userinput)
-
-    if boardsize == 6:
-        create_board(boardsize)
-    elif boardsize == 10:
-        create_board(boardsize)
+    instruct_choice = input("View game instructions? (y/n): \n")
+    if instruct_choice is "y":
+        instructions()
     else:
-        print(f"Sorry {boardsize} isn't valid, please enter either 10 or 6")
-        game_select()
+        print("Please select a game board size")
+        print("6 = 6x6 game board")
+        print("10 = 10x10 game board")
+        userinput = input("Enter 6 or 10: \n")
+
+        boardsize = int(userinput)
+
+        if boardsize == 6:
+            create_board(boardsize)
+        elif boardsize == 10:
+            create_board(boardsize)
+        else:
+            print(f"Sorry {boardsize} isn't valid, please enter 10 or 6")
+            game_select()
 
 
 print(Fore.BLACK, Back.CYAN + Style.BRIGHT + "Welcome to Battleships!",
