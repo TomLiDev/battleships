@@ -358,14 +358,17 @@ def game_select():
         print("6 = 6x6 game board")
         print("10 = 10x10 game board")
         userinput = input("Enter 6 or 10: \n")
-        boardsize = int(userinput)
-        if boardsize == 6:
-            create_board(boardsize)
-        elif boardsize == 10:
-            create_board(boardsize)
-        else:
-            print(f"Sorry {boardsize} isn't valid, please enter 10 or 6")
-            game_select()
+        try:
+            boardsize = int(userinput)
+            if boardsize == 6:
+                create_board(boardsize)
+            elif boardsize == 10:
+                create_board(boardsize)
+            else:
+                print(f"Sorry {boardsize} isn't valid, please enter 10 or 6")
+                game_select()
+        except ValueError:
+            print("Please enter 6 or 10")
 
 
 print(Fore.BLACK, Back.CYAN + Style.BRIGHT + "Welcome to Battleships!",
