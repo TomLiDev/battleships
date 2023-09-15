@@ -205,6 +205,9 @@ def check_ship_sunk(ship_value, board, boardsize, is_player):
     x = 0
     board_ship_check = board[1:]
     ship_sunk = bool
+    for ship in SHIPS:
+        if ship["value"] == ship_value:
+            ship_name = ship["name"]
     for row in board_ship_check:
         row_ship_check = row[1:]
         for item in row_ship_check:
@@ -214,10 +217,10 @@ def check_ship_sunk(ship_value, board, boardsize, is_player):
                 break
             elif x == y:
                 if is_player is True:
-                    print(Fore.GREEN + "We sunk an enemy ship!")
+                    print(Fore.GREEN + f"We sunk an enemy {ship_name}!")
                     print(Style.RESET_ALL)
                 else:
-                    print(Fore.RED + "The enemy sunk one of our ships!")
+                    print(Fore.RED + f"The enemy sunk our{ship_name}!")
                     print(Style.RESET_ALL)
         if ship_sunk is False:
             break
@@ -352,13 +355,13 @@ def game_select():
     if instruct_choice == "y":
         instructions()
     else:
+        for item in SHIPS:
+            print(item["value"])
         print("Please select a game board size")
         print("6 = 6x6 game board")
         print("10 = 10x10 game board")
         userinput = input("Enter 6 or 10: \n")
-
         boardsize = int(userinput)
-
         if boardsize == 6:
             create_board(boardsize)
         elif boardsize == 10:
