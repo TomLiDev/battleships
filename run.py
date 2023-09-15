@@ -119,7 +119,25 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             player_shots_store.append(user_grid_fire)
             split_fire_reference = user_grid_fire.split(",")
             column_ref = int(split_fire_reference[1])
+            row_ref = (split_fire_reference[0])
+            row_references = [item[0] for item in computer_board]
+            column_references = computer_board[0]
             ships_remaining = bool
+            print("Row references", row_references)
+            print("Row Reference", row_ref)
+            print("Column references", column_references)
+            print("Column ref", column_ref)
+
+            if row_ref not in row_references:
+                print("Invalid row")
+                player_fire(player_board, computer_board, boardsize, p_hits,
+                            c_hits, players_turn, ships_remaining,
+                            computer_board_for_player)
+            if column_ref not in column_references:
+                print("Invalid column")
+                player_fire(player_board, computer_board, boardsize, p_hits,
+                            c_hits, players_turn, ships_remaining,
+                            computer_board_for_player)
 
             for row in computer_board:
                 if row[0] == split_fire_reference[0]:
