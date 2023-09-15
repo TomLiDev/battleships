@@ -110,6 +110,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     Function which takes input from player to fire on the computer board,
     carried out multiple validation checks to ensure fire will be accepted
     or asks the player to retry entering coordinates accordingly.
+    List comprehension code for creating row_references adapted from external
+    source. Details in readme.
     """
     user_grid_fire = input("Enter fire reference e.g B,3: \n")
     print("Fire reference", user_grid_fire)
@@ -126,11 +128,6 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
             row_references = [item[0] for item in computer_board]
             column_references = computer_board[0]
             ships_remaining = bool
-            print("Row references", row_references)
-            print("Row Reference", player_row_ref)
-            print("Column references", column_references)
-            print("Column ref", column_ref)
-
             if player_row_ref not in row_references:
                 print("Invalid row")
                 player_fire(player_board, computer_board, boardsize, p_hits,
@@ -151,7 +148,8 @@ def player_fire(player_board, computer_board, boardsize, p_hits, c_hits,
     player_fire_placement(user_grid_fire, computer_board_for_player,
                           computer_board, boardsize, player_board, p_hits,
                           c_hits)
-    return players_turn, ships_remaining
+    player_fire_valid = True
+    return players_turn, ships_remaining, player_fire_valid
 
 
 def player_fire_placement(user_grid_fire, computer_board_for_player,
@@ -159,8 +157,8 @@ def player_fire_placement(user_grid_fire, computer_board_for_player,
                           c_hits):
     """
     Function which takes validated player fire coordinates and checks if they
-    have hit or missed, prints relevant messages to communicate to player
-    and returns the game board accordinlgy. 
+    have hit or missed, prints relevant messages to communicate to player,
+    and returns the game board accordingly.
     """
     split_fire_reference = user_grid_fire.split(",")
     column_ref = int(split_fire_reference[1])

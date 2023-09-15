@@ -229,6 +229,10 @@ The following sites were used for information/code:
 
 https://nedbatchelder.com/blog/201308/names_and_values_making_a_game_board.html
 
+#### List comprehension for creatinf row_references list
+
+https://www.geeksforgeeks.org/python-get-first-element-of-each-sublist/
+
 ### Content
 
 The majority of the content was created by the author.
